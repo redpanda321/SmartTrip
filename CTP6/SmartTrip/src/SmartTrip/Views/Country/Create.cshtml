@@ -1,0 +1,25 @@
+﻿@model SmartTrip.Models.CountryEditModel
+    
+@{
+    ViewBag.Title = "Create a Country";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    
+    <div class="form-group">
+        @Html.LabelFor(x => x.CountryName)
+        @Html.EditorFor(x => x.CountryName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.UserName)
+        @Html.EditorFor(x => x.UserName)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+}

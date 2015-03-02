@@ -1,0 +1,45 @@
+﻿@model SmartTrip.Models.CityEditModel
+    
+@{
+    ViewBag.Title = "Create a City";
+    
+}
+   
+
+@using (Html.BeginForm("Create","City",  FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        @Html.AntiForgeryToken();
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.CityName)
+            @Html.EditorFor(x => x.CityName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.UserName)
+            @Html.EditorFor(x => x.UserName)
+        </div>
+
+        <div class="form-group">
+           
+            @Html.HiddenFor(x => x.ImageUrl)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Summary)
+            @Html.EditorFor(x => x.Summary)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.CountryName)
+            @Html.DropDownListFor(x => x.CountryName, ViewBag.countries as IEnumerable<SelectListItem>)
+        </div>
+
+        <div class="form-group">
+
+            <input type="file" name="file" id="file1" />
+        </div>
+
+        
+        <input type="submit" value="submit" class="btn btn-default" />
+}
