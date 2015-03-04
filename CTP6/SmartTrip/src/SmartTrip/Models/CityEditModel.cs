@@ -1,9 +1,4 @@
 ﻿
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Mvc.Rendering;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace SmartTrip.Models
 {
     public class CityEditModel

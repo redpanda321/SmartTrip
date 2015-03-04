@@ -18,7 +18,6 @@ namespace SmartTrip.Models
 
         public string UserName { set; get; }
 
-      
 
 		public virtual Country Country { set; get; }
 

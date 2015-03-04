@@ -2,5 +2,6 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
+    <TargetKREVersion>kre-clr-win-x86.1.0.0-beta3-11030</TargetKREVersion>
   </PropertyGroup>
 </Project>

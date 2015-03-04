@@ -3,8 +3,28 @@ using System.Collections.Generic;
 
 namespace SmartTrip.Models
 {
+
+
+    public  class   Category {
+
+     
+      public List<string> CategoryType { set; get; }
+
+     public Category() {
+
+            CategoryType = new List<string>();
+            CategoryType.Add("scenery");
+            CategoryType.Add("cate");
+            CategoryType.Add("service");
+            CategoryType.Add("shopping");
+
+        }
+
+    }
+   
     public class Scenery
     {
+       
         public int Id { set; get; }
 
         public string SceneryName { set; get; }
@@ -31,18 +51,22 @@ namespace SmartTrip.Models
 
         public string WebUrl { set; get; }
 
-        public enum Category { scenery=1,cate, service,shopping}
+        public string Category { set; get; }
 
-        public string Tel { set; get; }
+        public string Telephone { set; get; }
 
-        //
         public Decimal Price { set; get; }
-        public String Currency { set; get; }
+        public string Currency { set; get; }
+        
+
+        public string CityName { set; get; }
+
+        public string UserName { set; get; }
 
         public virtual ICollection<SceneryComment> SceneryComments { set; get; }
 
         public virtual City City { set; get; }
 
-		public string UserName { set; get; }
+	
     }
 }
