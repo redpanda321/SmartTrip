@@ -13,6 +13,10 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using SmartTrip.Models;
+using System.Threading.Tasks;
+using Microsoft.Data.Entity.SqlServer;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace SmartTrip
 {
@@ -89,6 +93,75 @@ namespace SmartTrip
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+
+            CreateSampleData(app.ApplicationServices).Wait();
+
         }
+        
+        private static async Task CreateSampleData(IServiceProvider applicationServices)
+        {
+            using (var dbContext = applicationServices.GetService<ApplicationDbContext>())
+            {
+                var sqlServerDatabase = dbContext.Database as SqlServerDatabase;
+                if (sqlServerDatabase != null)
+                {
+
+                    if (await sqlServerDatabase.EnsureCreatedAsync())
+                    {
+                        //add country
+                        var countries = new List<Country>
+                        {
+                            new Country { CountryName="China"},
+                            new Country { CountryName ="Usa"}
+
+                        };
+
+
+                        int i;
+
+                        for (i = 0; i < countries.Count; i++)
+                        {
+
+                            await dbContext.Countries.AddAsync(countries.ToArray()[i]);
+                        }
+
+                        // add city
+                        var cities = new List<City>
+                        {
+                             new City { CityName = "Chengdu"},
+                             new City { CityName = "Beijing"}
+                        };
+
+                        for (i = 0; i < cities.Count; i++)
+                        {
+                            await dbContext.Cities.AddAsync(cities.ToArray()[i]);
+                        }
+
+                        
+                        // add some users
+                        var userManager = applicationServices.GetService<UserManager<ApplicationUser>>();
+
+                        // add editor user
+                        var stephen = new ApplicationUser
+                        {
+                            UserName = "Stephen"
+                        };
+                        var result = await userManager.CreateAsync(stephen, "P@ssw0rd");
+                        await userManager.AddClaimAsync(stephen, new Claim("CanEdit", "true"));
+
+                        // add normal user
+                        var bob = new ApplicationUser
+                        {
+                            UserName = "Bob"
+                        };
+                        await userManager.CreateAsync(bob, "P@ssw0rd");
+
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

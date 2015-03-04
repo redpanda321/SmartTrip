@@ -164,7 +164,9 @@ namespace SmartTrip.Migrations
                 
                 builder.Entity("SmartTrip.Models.Scenery", b =>
                     {
+                        b.Property<string>("Category");
                         b.Property<int?>("CityId");
+                        b.Property<string>("CityName");
                         b.Property<string>("Currency");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
@@ -176,7 +178,7 @@ namespace SmartTrip.Migrations
                         b.Property<int>("Score");
                         b.Property<int>("Star");
                         b.Property<string>("Summary");
-                        b.Property<string>("Tel");
+                        b.Property<string>("Telephone");
                         b.Property<string>("Ticket");
                         b.Property<string>("Traffic");
                         b.Property<string>("UserName");

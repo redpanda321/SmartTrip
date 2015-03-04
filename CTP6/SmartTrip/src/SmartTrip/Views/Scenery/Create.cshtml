@@ -1,0 +1,95 @@
+﻿@model SmartTrip.Models.SceneryEditModel
+    
+@{
+    ViewBag.Title = "Create a Scenery";
+    
+}
+   
+
+@using (Html.BeginForm("Create","Scenery",  FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        @Html.AntiForgeryToken();
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.SceneryName)
+            @Html.EditorFor(x => x.SceneryName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Star)
+            @Html.EditorFor(x => x.Star)
+        </div>
+
+        <div class="form-group">
+           
+            @Html.HiddenFor(x => x.ImageUrls)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Summary)
+            @Html.EditorFor(x => x.Summary)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Ticket)
+            @Html.EditorFor(x => x.Ticket)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.OpenTime)
+            @Html.EditorFor(x => x.OpenTime)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Traffic)
+            @Html.EditorFor(x => x.Traffic)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.WebUrl)
+            @Html.EditorFor(x => x.WebUrl)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Category)
+            @Html.DropDownListFor(x => x.Category, ViewBag.categories as IEnumerable<SelectListItem>)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Telephone)
+            @Html.EditorFor(x => x.Telephone)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Price)
+            @Html.EditorFor(x => x.Price)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Currency)
+            @Html.DropDownListFor(x => x.Currency,ViewBag.currencies as IEnumerable<SelectListItem>)
+        </div>
+
+       
+        <div class="form-group">
+            @Html.LabelFor(x => x.CityName)
+            @Html.DropDownListFor(x => x.CityName,ViewBag.cities as IEnumerable<SelectListItem>)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.UserName)
+            @Html.EditorFor(x => x.UserName)
+        </div>
+
+
+
+        <div class="form-group">
+
+            <input type="file" name="files" id="file1" />
+            <input type="file" name="files" id="file2" />
+            <input type="file" name="files" id="file3" />
+        </div>
+
+        
+        <input type="submit" value="submit" class="btn btn-default" />
+}
