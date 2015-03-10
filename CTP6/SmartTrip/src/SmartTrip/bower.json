@@ -7,14 +7,20 @@
         "jquery-validation": "1.11.1",
         "jquery-validation-unobtrusive": "3.2.2",
         "hammer.js": "2.0.4",
-        "bootstrap-touch-carousel": "0.8.0"
+        "bootstrap-touch-carousel": "0.8.0",
+        "bootstrap-datepicker": "latest"
     },
     "exportsOverride": {
-    "bootstrap": {
-      "js": "dist/js/*.*",
-      "css": "dist/css/*.*",
-      "fonts": "dist/fonts/*.*"
-    },
+        "bootstrap": {
+            "js": "dist/js/*.*",
+            "css": "dist/css/*.*",
+            "fonts": "dist/fonts/*.*"
+        },
+    "bootstrap-datepicker": {
+        "js": "js/*.*",
+        "js/locales": "js/locales/*.*",
+      "css": "css/*.*"
+        },
     "bootstrap-touch-carousel": {
       "js": "dist/js/*.*",
       "css": "dist/css/*.*"

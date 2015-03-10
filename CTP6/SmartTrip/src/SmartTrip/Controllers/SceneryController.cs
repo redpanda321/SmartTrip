@@ -21,27 +21,22 @@ namespace SmartTrip.Controllers
 
         private IHostingEnvironment env;
 
-       public void InitCity()
+       public IEnumerable<SelectListItem> InitCity()
         {
 
-            var cities = db.Cities.AsEnumerable();
-            List<string> citiesList = new List<string>();
-            foreach (var city in cities)
-            {
-                citiesList.Add(city.CityName);
-            }
-            ViewBag.cities = new SelectList(citiesList.AsEnumerable());
+            return  new SelectList(db.Cities.ToList(),"Id","CityName");
 
         }
 
-        public  void InitCategory()
+        public  IEnumerable<SelectListItem> InitCategory()
         {
             var category = new Category();
-            ViewBag.categories = new SelectList ( category.CategoryType.AsEnumerable());
-             
+
+            return new SelectList( category.CategoryType.AsEnumerable());
+         
         }
 
-        public  void InitCurrency()
+        public  IEnumerable<SelectListItem> InitCurrency()
         {
             // CurrentCulture.NumberFormat.CurrencySymbol
 
@@ -64,7 +59,7 @@ namespace SmartTrip.Controllers
                 currencies.Add(ri.ISOCurrencySymbol);
             }
             
-            ViewBag.currencies = new SelectList(currencies.AsEnumerable());    
+           return new SelectList(currencies.AsEnumerable());    
         }
 
         private async Task<List<string>> SaveFiles(IEnumerable<IFormFile> files)
@@ -104,61 +99,80 @@ namespace SmartTrip.Controllers
    
         public IActionResult Create()
         {
+           var sceneryViewModel = new SceneryViewModel();
+          
+           sceneryViewModel.Cities =  InitCity();
+           sceneryViewModel.Categories = InitCategory();
+           sceneryViewModel.Currencies = InitCurrency();
 
-            InitCity();
-            InitCategory();
-            InitCurrency();
-
-            return View();
+            return View(sceneryViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IEnumerable<IFormFile> files,SceneryEditModel model)
+        public async Task<IActionResult> Create(IEnumerable<IFormFile> files,SceneryViewModel model)
         {
             //IFormFile
+            List<string> imageUrlList = new List<string>();
 
-            List<string> imageUrlList = await SaveFiles(files);
+            if (files != null)
+              imageUrlList = await SaveFiles(files);
 
             //SceneryEditModel
-   /*       if (!ModelState.IsValid)
+         if (!ModelState.IsValid)
             {
                 return View(model);
             }
-  */
-
+  
             var scenery = new Scenery
             {
                 
-                SceneryName = model.SceneryName,
-                ImageUrls = (imageUrlList.Count > 0) ? imageUrlList : model.ImageUrls,
-                Star = model.Star,
-                Summary = model.Summary,
-                Ticket = model.Ticket,
-                OpenTime = model.OpenTime,
-                Traffic = model.Traffic,
-                WebUrl = model.WebUrl,
-                Category = model.Category,   //
-                Telephone = model.Telephone,
-                Price = model.Price,
-                Currency = model.Currency,  //
-                CityName = model.CityName,
-                UserName = model.UserName
+                SceneryName = model.Scenery.SceneryName,
+                Star = model.Scenery.Star,
+                Summary = model.Scenery.Summary,
+                Ticket = model.Scenery.Ticket,
+                OpenTime = model.Scenery.OpenTime,
+                Traffic = model.Scenery.Traffic,
+                WebUrl = model.Scenery.WebUrl,
+                Category = model.Scenery.Category,   //
+                Telephone = model.Scenery.Telephone,
+                Price = model.Scenery.Price,
+                Currency = model.Scenery.Currency,  //
+                CityId = model.Scenery.CityId    //
+              
 
             };
 
             db.Sceneries.Add(scenery);
             await db.SaveChangesAsync();
 
+
+            foreach (var imageUrl in imageUrlList) {
+
+                var image = new Image
+                {
+
+                    ImageUrl = imageUrl,
+                    SceneryId = scenery.Id
+                };
+
+                db.Images.Add(image);
+                await db.SaveChangesAsync();
+
+
+            }
+
+
             return RedirectToAction("Index");
            }
 
         public async Task<IActionResult> Edit(int id)
         {
-            //ViewBag
-            InitCity();
-            InitCategory();
-            InitCurrency();
+            //
+            var sceneryViewModel = new SceneryViewModel();
+            sceneryViewModel.Cities = InitCity();
+            sceneryViewModel.Categories = InitCategory();
+            sceneryViewModel.Currencies = InitCurrency();
             
             //Edit
             var scenery = await db.Sceneries.SingleOrDefaultAsync(x => x.Id == id);
@@ -167,26 +181,28 @@ namespace SmartTrip.Controllers
                 return HttpNotFound();
             }
 
-            return View(scenery);
+            sceneryViewModel.Scenery = scenery;
+
+            return View(sceneryViewModel);
         }
 
 
        
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, SceneryEditModel model,IEnumerable<IFormFile> files)
+        public async Task<IActionResult> Edit(int id, SceneryViewModel model,IEnumerable<IFormFile> files)
         {
 
             //IFormFile
             List<string> imageUrlList = await SaveFiles(files);
 
             //SceneryEditModel
-            /*
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            */
+            
 
             var scenery = await db.Sceneries.SingleOrDefaultAsync(x => x.Id == id);
             if (scenery == null)
@@ -194,24 +210,41 @@ namespace SmartTrip.Controllers
                 return HttpNotFound();
             }
 
-            scenery.SceneryName = model.SceneryName;
-            scenery.ImageUrls = (imageUrlList.Count>0)?imageUrlList : model.ImageUrls;
-            scenery.Star = model.Star;
-            scenery.Summary =  model.Summary;
-            scenery.Ticket = model.Ticket;
-            scenery.OpenTime = model.OpenTime;
-            scenery.Traffic = model.Traffic;
-            scenery.WebUrl = model.WebUrl;
-            scenery.Category = model.Category;
-            scenery.Telephone = model.Telephone;
-            scenery.Price = model.Price;
-            scenery.Currency = model.Currency;
-            scenery.CityName = model.CityName;
-            scenery.UserName = model.UserName;
-
-
+            scenery.SceneryName = model.Scenery.SceneryName;
+           
+            scenery.Star = model.Scenery.Star;
+            scenery.Summary =  model.Scenery.Summary;
+            scenery.Ticket = model.Scenery.Ticket;
+            scenery.OpenTime = model.Scenery.OpenTime;
+            scenery.Traffic = model.Scenery.Traffic;
+            scenery.WebUrl = model.Scenery.WebUrl;
+            scenery.Category = model.Scenery.Category;
+            scenery.Telephone = model.Scenery.Telephone;
+            scenery.Price = model.Scenery.Price;
+            scenery.Currency = model.Scenery.Currency;
+            scenery.CityId = model.Scenery.CityId;
+           
             // TODO Exception handling
             db.SaveChanges();
+
+
+            foreach (var imageUrl in imageUrlList)
+            {
+
+                var image = new Image
+                {
+
+                    ImageUrl = imageUrl,
+                    SceneryId = scenery.Id
+                };
+
+                db.Images.Add(image);
+                await db.SaveChangesAsync();
+
+
+            }
+
+
 
             return RedirectToAction("Index", new { id = id });
         }

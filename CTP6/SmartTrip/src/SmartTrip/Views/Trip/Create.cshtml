@@ -1,23 +1,25 @@
-﻿@model SmartTrip.Models.Transit
-
+﻿@model SmartTrip.Models.TransitEditModel
+    
 @{
-    ViewBag.Title = "Edit a Transit";
+    ViewBag.Title = "Create a Transit";
+    
 }
+   
 
-@using (Html.BeginForm("Edit","Transit",FormMethod.Post))
+@using (Html.BeginForm("Create","Transit",  FormMethod.Post))
 {
-   @Html.AntiForgeryToken();
+        @Html.AntiForgeryToken();
 
-    <div class="form-group">
-        @Html.LabelFor(x => x.TransitName)
-        @Html.EditorFor(x => x.TransitName)
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.TransitName)
+            @Html.EditorFor(x => x.TransitName)
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(x => x.TransitType)
             @Html.EditorFor(x => x.TransitType)
         </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(x => x.TransitNumber)
             @Html.EditorFor(x => x.TransitNumber)
@@ -63,9 +65,12 @@
             @Html.EditorFor(x => x.Memo)
         </div>
 
+       
+        <div class="form-group">
+            @Html.LabelFor(x => x.UserName)
+            @Html.EditorFor(x => x.UserName)
+        </div>
 
         
-
         <input type="submit" value="submit" class="btn btn-default" />
 }
-

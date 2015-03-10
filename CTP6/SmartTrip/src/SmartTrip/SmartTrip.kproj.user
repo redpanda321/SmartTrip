@@ -3,5 +3,6 @@
   <PropertyGroup>
     <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
     <TargetKREVersion>kre-clr-win-x86.1.0.0-beta3-11030</TargetKREVersion>
+    <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
 </Project>

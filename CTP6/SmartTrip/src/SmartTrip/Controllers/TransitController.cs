@@ -138,7 +138,7 @@ namespace SmartTrip.Controllers
                 Currency = model.Currency,   //
                 Amount = model.Amount,
                 Memo = model.Memo,
-                UserName = model.UserName
+             
 
             };
 
@@ -198,7 +198,7 @@ namespace SmartTrip.Controllers
             transit.Currency = model.Currency;
             transit.Amount = model.Amount;
             transit.Memo = model.Memo;
-            transit.UserName = model.UserName;
+          
 
 
             // TODO Exception handling

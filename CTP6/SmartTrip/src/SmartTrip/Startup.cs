@@ -49,6 +49,11 @@ namespace SmartTrip
             // Add MVC services to the services container.
             services.AddMvc();
 
+
+            //Add Session
+            services.AddCachingServices();
+            services.AddSessionServices();
+
             // Uncomment the following line to add Web API servcies which makes it easier to port Web API 2 controllers.
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
             // services.AddWebApiConventions();
@@ -92,6 +97,12 @@ namespace SmartTrip
 
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+            });
+
+            //Add Session
+            app.UseSession(o => {
+
+                o.IdleTimeout = TimeSpan.FromSeconds(6000);
             });
 
             CreateSampleData(app.ApplicationServices).Wait();

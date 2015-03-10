@@ -39,6 +39,8 @@ namespace SmartTrip.Models
 
         public DbSet<HotelComment> HotelComments { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
 
 
         public ApplicationDbContext()

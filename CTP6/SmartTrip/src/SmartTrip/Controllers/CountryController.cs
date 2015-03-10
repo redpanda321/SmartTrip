@@ -27,13 +27,12 @@ namespace SmartTrip.Controllers
 
         public IActionResult Create()
         {
-           
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CountryEditModel model)
+        public async Task<IActionResult> Create(CountryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -42,8 +41,7 @@ namespace SmartTrip.Controllers
 
             var country = new Country
             {
-                UserName = model.UserName,
-                CountryName = model.CountryName,
+                CountryName = model.Country.CountryName,
              
             };
 
@@ -65,7 +63,7 @@ namespace SmartTrip.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, CountryEditModel model)
+        public async Task<IActionResult> Edit(int id, Country model)
         {
             if (!ModelState.IsValid)
             {
@@ -79,7 +77,6 @@ namespace SmartTrip.Controllers
             }
 
             country.CountryName = model.CountryName;
-            country.UserName = model.UserName;
       
             // TODO Exception handling
             db.SaveChanges();

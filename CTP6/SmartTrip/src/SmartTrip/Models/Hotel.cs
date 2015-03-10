@@ -27,13 +27,18 @@ namespace SmartTrip.Models
 
         public string Summary { set; get; }
 
-
+        //many to one
+        public int CityId { set; get; }
         public virtual City City { set; get; }
+        
+       
+        //one to many
 
-
+        public virtual ICollection<Schedule> Schedules { set; get; }
+        public virtual ICollection<Image> Images { set; get; }
         public virtual ICollection<HotelComment> HotelComments { set; get; }
 
-        public string UserName { set; get; }
+      
 
     }
 }

@@ -28,45 +28,30 @@ namespace SmartTrip.Controllers
         public IActionResult Index()
         {
             var cities = db.Cities.ToList();
-
-            return View(cities);
+           return View(cities);
         }
-
-    
+  
         public IActionResult Create()
         {
-            
-            var countries =  db.Countries.AsEnumerable();
-
-            List<string> countriesList = new List<string>();
-
-           foreach  ( var  country  in  countries)
-            {
-                countriesList.Add(country.CountryName);
-            }
-
-            ViewBag.countries = new SelectList(countriesList);
-
-            return View();
+           
+            var cityViewModel = new CityViewModel();
+            cityViewModel.Countries = new SelectList(db.Countries.ToList(), "Id", "CountryName");
+            return View(cityViewModel);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IFormFile file,CityEditModel model)
+        public async Task<IActionResult> Create(IFormFile file,CityViewModel model)
         {
 
             //IFormFile
-            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            var filePath = "";
+            if (file != null)
+                filePath = await SaveFile(file);
 
-            string fileName = parsedContentDisposition.FileName.Trim('"');
 
-            string filePath = Path.Combine(env.WebRoot + "\\images\\" + fileName);
-
-            await file.SaveAsAsync(filePath);
-
-       
-            //CityEditModel
+            //CityViewModel
 
             if (!ModelState.IsValid)
             {
@@ -75,11 +60,11 @@ namespace SmartTrip.Controllers
 
             var city = new City
             {
-                UserName = model.UserName,
-                CityName = model.CityName,
-                ImageUrl = (filePath.Length > 0) ? filePath : model.ImageUrl,
-                Summary = model.Summary,
-                CountryName = model.CountryName
+
+                CityName = model.City.CityName,
+                ImageUrl = (filePath.Length > 0) ? filePath : model.City.ImageUrl,
+                Summary = model.City.Summary,
+                CountryId = model.City.CountryId
 
             };
 
@@ -91,33 +76,25 @@ namespace SmartTrip.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            //ViewBag
-            var countries = db.Countries.AsEnumerable();
 
-            List<string> countriesList = new List<string>();
-
-            foreach (var country in countries)
-            {
-                countriesList.Add(country.CountryName);
-            }
-            
-            ViewBag.countries = new SelectList(countriesList);
-            
-            
+           
             var city = await db.Cities.SingleOrDefaultAsync(x => x.Id == id);
             if (city == null)
             {
                 return HttpNotFound();
             }
 
-            return View(city);
+            var cityViewModel = new CityViewModel {
+                City = city
+            };
+            cityViewModel.Countries = new SelectList(db.Countries.ToList(), "Id", "CountryName");
+            
+            return View(cityViewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, CityEditModel model,IFormFile file)
-        {
 
-            //IFormFile
+        public async Task<string> SaveFile(IFormFile file)
+        {
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
             string fileName = parsedContentDisposition.FileName.Trim('"');
@@ -126,8 +103,21 @@ namespace SmartTrip.Controllers
 
             await file.SaveAsAsync(filePath);
 
+            return filePath;
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CityViewModel model,IFormFile file)
+        {
+
+            //IFormFile
+            var filePath = "";
+            if (file != null)
+                filePath = await SaveFile(file);
            
-            //CityEditModel
+            //CityViewModel
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -140,11 +130,11 @@ namespace SmartTrip.Controllers
             }
 
 
-            city.UserName = model.UserName;
-            city.CityName = model.CityName;
-            city.ImageUrl = (filePath.Count()>0)? filePath : model.ImageUrl;
-            city.Summary = model.Summary;
-            city.CountryName = model.CountryName;
+            
+            city.CityName = model.City.CityName;
+            city.ImageUrl = (filePath.Count()>0)? filePath : model.City.ImageUrl;
+            city.Summary = model.City.Summary;
+            city.CountryId = model.City.CountryId;
             
 
             // TODO Exception handling

@@ -1,4 +1,4 @@
-﻿@model SmartTrip.Models.SceneryEditModel
+﻿@model SmartTrip.Models.SceneryViewModel
     
 @{
     ViewBag.Title = "Create a Scenery";
@@ -11,77 +11,66 @@
         @Html.AntiForgeryToken();
 
         <div class="form-group">
-            @Html.LabelFor(x => x.SceneryName)
-            @Html.EditorFor(x => x.SceneryName)
+            @Html.LabelFor(x => x.Scenery.SceneryName)
+            @Html.EditorFor(x => x.Scenery.SceneryName)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Star)
-            @Html.EditorFor(x => x.Star)
+            @Html.LabelFor(x => x.Scenery.Star)
+            @Html.EditorFor(x => x.Scenery.Star)
+        </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(x => x.Scenery.Summary)
+            @Html.EditorFor(x => x.Scenery.Summary)
         </div>
 
         <div class="form-group">
-           
-            @Html.HiddenFor(x => x.ImageUrls)
+            @Html.LabelFor(x => x.Scenery.Ticket)
+            @Html.EditorFor(x => x.Scenery.Ticket)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Summary)
-            @Html.EditorFor(x => x.Summary)
+            @Html.LabelFor(x => x.Scenery.OpenTime)
+            @Html.EditorFor(x => x.Scenery.OpenTime)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Ticket)
-            @Html.EditorFor(x => x.Ticket)
+            @Html.LabelFor(x => x.Scenery.Traffic)
+            @Html.EditorFor(x => x.Scenery.Traffic)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.OpenTime)
-            @Html.EditorFor(x => x.OpenTime)
+            @Html.LabelFor(x => x.Scenery.WebUrl)
+            @Html.EditorFor(x => x.Scenery.WebUrl)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Traffic)
-            @Html.EditorFor(x => x.Traffic)
+            @Html.LabelFor(x => x.Scenery.Category)
+            @Html.DropDownListFor(x => x.Scenery.Category,Model.Categories)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.WebUrl)
-            @Html.EditorFor(x => x.WebUrl)
+            @Html.LabelFor(x => x.Scenery.Telephone)
+            @Html.EditorFor(x => x.Scenery.Telephone)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Category)
-            @Html.DropDownListFor(x => x.Category, ViewBag.categories as IEnumerable<SelectListItem>)
+            @Html.LabelFor(x => x.Scenery.Price)
+            @Html.EditorFor(x => x.Scenery.Price)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Telephone)
-            @Html.EditorFor(x => x.Telephone)
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => x.Price)
-            @Html.EditorFor(x => x.Price)
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => x.Currency)
-            @Html.DropDownListFor(x => x.Currency,ViewBag.currencies as IEnumerable<SelectListItem>)
+            @Html.LabelFor(x => x.Scenery.Currency)
+            @Html.DropDownListFor(x => x.Scenery.Currency,Model.Currencies)
         </div>
 
        
         <div class="form-group">
-            @Html.LabelFor(x => x.CityName)
-            @Html.DropDownListFor(x => x.CityName,ViewBag.cities as IEnumerable<SelectListItem>)
+            @Html.LabelFor(x => x.Scenery.City)
+            @Html.DropDownListFor(x => x.Scenery.CityId,Model.Cities)
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => x.UserName)
-            @Html.EditorFor(x => x.UserName)
-        </div>
-
-
 
         <div class="form-group">
 

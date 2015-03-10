@@ -1,4 +1,4 @@
-﻿@model SmartTrip.Models.City
+﻿@model SmartTrip.Models.CityViewModel
 
 @{
     ViewBag.Title = "Edit a City";
@@ -9,27 +9,24 @@
     @Html.AntiForgeryToken();
 
     <div class="form-group">
-        @Html.LabelFor(x => x.CityName)
-        @Html.EditorFor(x => x.CityName)
+        @Html.LabelFor(x => x.City.CityName)
+        @Html.EditorFor(x => x.City.CityName)
     </div>
+ 
 
         <div class="form-group">
-            @Html.LabelFor(x => x.UserName)
-            @Html.EditorFor(x => x.UserName)
+            @Html.LabelFor(x => x.City.ImageUrl)
+            @Html.EditorFor(x => x.City.ImageUrl)
         </div>
 
         <div class="form-group">
-            @Html.HiddenFor(x => x.ImageUrl)
+            @Html.LabelFor(x => x.City.Summary)
+            @Html.EditorFor(x => x.City.Summary)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Summary)
-            @Html.EditorFor(x => x.Summary)
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => x.CountryName)
-            @Html.DropDownListFor(x => x.CountryName, ViewBag.countries as IEnumerable<SelectListItem>)
+            @Html.LabelFor(x => x.City.Country)
+            @Html.DropDownListFor(x => x.City.CountryId, Model.Countries)
         </div>
 
 

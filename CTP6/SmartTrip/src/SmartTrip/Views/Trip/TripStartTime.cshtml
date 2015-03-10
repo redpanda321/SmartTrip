@@ -1,0 +1,22 @@
+﻿@model SmartTrip.Models.TripStartTimeEditModel
+    
+@{
+    ViewBag.Title = "Trip - Select  StartTime";
+    
+}
+   
+
+@using (Html.BeginForm("TripStartTime", "Trip",  FormMethod.Post))
+{
+        @Html.AntiForgeryToken();
+
+        
+
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(x => x.StartTime)
+            @Html.TextBoxFor(x => x.StartTime,new {@class = "form-control datepicker",palceholder= "Enter date here..." })
+        </div>
+
+      
+        <input type="submit" name="btnNext" value="next" class="btn btn-default" />
+}

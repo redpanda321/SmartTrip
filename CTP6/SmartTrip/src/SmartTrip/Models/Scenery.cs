@@ -4,11 +4,9 @@ using System.Collections.Generic;
 namespace SmartTrip.Models
 {
 
-
     public  class   Category {
 
-     
-      public List<string> CategoryType { set; get; }
+     public List<string> CategoryType { set; get; }
 
      public Category() {
 
@@ -28,17 +26,17 @@ namespace SmartTrip.Models
         public int Id { set; get; }
 
         public string SceneryName { set; get; }
-
-        public ICollection<string> ImageUrls { set; get; }
-
+        
         //assessment
         public int Star { set; get; }
 
+        // 
         public int Score { set; get; }
 
         public int Visited { set; get; }
 
         public int Ranking { set; get; }
+        //
 
         public string Summary { set; get; }
 
@@ -58,15 +56,18 @@ namespace SmartTrip.Models
         public Decimal Price { set; get; }
         public string Currency { set; get; }
         
-
-        public string CityName { set; get; }
-
-        public string UserName { set; get; }
-
-        public virtual ICollection<SceneryComment> SceneryComments { set; get; }
-
+        //many to one
+        public int CityId { set; get; }
         public virtual City City { set; get; }
 
+        //many to many
+        public virtual ICollection<Schedule> Schedules { set; get; }
+
+        //one to many
+        public virtual ICollection<Image> Images { set; get; }
+        public virtual ICollection<SceneryComment> SceneryComments { set; get; }
+
+        
 	
     }
 }

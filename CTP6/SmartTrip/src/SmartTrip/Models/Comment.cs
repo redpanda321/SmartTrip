@@ -8,7 +8,7 @@ namespace SmartTrip.Models
 
         public string Content { set; get; }
 
-        public DateTime Time;
+        public DateTime Time { set; get; }
 
 		public string UserName { set; get; }
        
@@ -17,19 +17,21 @@ namespace SmartTrip.Models
 
 	public class CityComment : Comment {
 
-
+        public int CityId { set; get; }
 		public virtual City City { set; get; }
 	}
 
 	public class SceneryComment : Comment
 	{
-		public virtual Scenery Scenery { set; get; }
+        public int SceneryId { set; get; }
+        public virtual Scenery Scenery { set; get; }
 
 	}
 
 	public class HotelComment : Comment
 	{
-		public virtual Hotel Hotel { set; get; }
+        public int HotelId { set; get; }
+        public virtual Hotel Hotel { set; get; }
 
 	}
 }
