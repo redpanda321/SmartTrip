@@ -12,10 +12,10 @@ namespace SmartTrip.Models
 
             CategoryType = new List<string>();
             CategoryType.Add("scenery");
+            CategoryType.Add("activity");
             CategoryType.Add("cate");
-            CategoryType.Add("service");
             CategoryType.Add("shopping");
-
+            CategoryType.Add("traffic");
         }
 
     }
@@ -60,8 +60,7 @@ namespace SmartTrip.Models
         public int CityId { set; get; }
         public virtual City City { set; get; }
 
-        //many to many
-        public virtual ICollection<Schedule> Schedules { set; get; }
+        public virtual Schedule Schedule { set; get; }
 
         //one to many
         public virtual ICollection<Image> Images { set; get; }

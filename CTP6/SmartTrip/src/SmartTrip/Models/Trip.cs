@@ -15,16 +15,14 @@ namespace SmartTrip.Models
 
         public DateTime StartTime { get; set; }
 
-		public int Days { get; set; }
+		public int Days { get; set; } //mean schedule amount
        
 		public string StartingCity { get; set; }
 
         //one to many
         public virtual ICollection<Schedule> Schedules { get; set; }
 
-        // many to many
-        public virtual ICollection<Country>  DestinationCountries { get; set; }
-        public virtual ICollection<City> DestinationCities { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
 
        
 

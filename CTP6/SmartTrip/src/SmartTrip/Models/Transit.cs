@@ -48,6 +48,8 @@ namespace SmartTrip.Models
 
        public string Memo { set; get; }
         
-       public virtual ICollection<Schedule> Schedules { set; get; }
+        //many to one
+
+       public virtual Schedule Schedule { set; get; }
     }
 }

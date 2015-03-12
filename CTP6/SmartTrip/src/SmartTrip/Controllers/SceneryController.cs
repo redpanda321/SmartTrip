@@ -84,6 +84,37 @@ namespace SmartTrip.Controllers
             return imageUrlList;
         }
 
+
+        private async Task<List<Image>> SaveFiles1(IEnumerable<IFormFile> files)
+        {
+
+            List<Image> imageList = new List<Image>();
+
+            foreach (var file in files)
+            {
+
+                var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+                string fileName = parsedContentDisposition.FileName.Trim('"');
+
+                string filePath = Path.Combine(env.WebRoot + "\\images\\" + fileName);
+
+                await file.SaveAsAsync(filePath);
+
+                var image = new Image
+                {
+
+                    ImageUrl = filePath,
+
+                };
+
+                imageList.Add(image);
+            }
+
+            return imageList;
+        }
+
+
         public SceneryController(ApplicationDbContext context,IHostingEnvironment hostingEnv )
         {
             db = context;
@@ -113,20 +144,21 @@ namespace SmartTrip.Controllers
         public async Task<IActionResult> Create(IEnumerable<IFormFile> files,SceneryViewModel model)
         {
             //IFormFile
-            List<string> imageUrlList = new List<string>();
+            List<Image> imageList = new List<Image>();
 
             if (files != null)
-              imageUrlList = await SaveFiles(files);
+              imageList = await SaveFiles1(files);
 
+            
             //SceneryEditModel
-         if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
-  
+
             var scenery = new Scenery
             {
-                
+
                 SceneryName = model.Scenery.SceneryName,
                 Star = model.Scenery.Star,
                 Summary = model.Scenery.Summary,
@@ -138,31 +170,13 @@ namespace SmartTrip.Controllers
                 Telephone = model.Scenery.Telephone,
                 Price = model.Scenery.Price,
                 Currency = model.Scenery.Currency,  //
-                CityId = model.Scenery.CityId    //
+                CityId = model.Scenery.CityId,    //
+                Images = imageList
               
-
             };
 
             db.Sceneries.Add(scenery);
             await db.SaveChangesAsync();
-
-
-            foreach (var imageUrl in imageUrlList) {
-
-                var image = new Image
-                {
-
-                    ImageUrl = imageUrl,
-                    SceneryId = scenery.Id
-                };
-
-                db.Images.Add(image);
-                await db.SaveChangesAsync();
-
-
-            }
-
-
             return RedirectToAction("Index");
            }
 
@@ -186,15 +200,17 @@ namespace SmartTrip.Controllers
             return View(sceneryViewModel);
         }
 
-
-       
+        
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, SceneryViewModel model,IEnumerable<IFormFile> files)
         {
 
             //IFormFile
-            List<string> imageUrlList = await SaveFiles(files);
+            List<Image> imageList = new List<Image>();
+                
+             if(files != null)   
+               imageList =  await SaveFiles1(files);
 
             //SceneryEditModel
             
@@ -223,27 +239,11 @@ namespace SmartTrip.Controllers
             scenery.Price = model.Scenery.Price;
             scenery.Currency = model.Scenery.Currency;
             scenery.CityId = model.Scenery.CityId;
+            scenery.Images = imageList;
+            
            
             // TODO Exception handling
             db.SaveChanges();
-
-
-            foreach (var imageUrl in imageUrlList)
-            {
-
-                var image = new Image
-                {
-
-                    ImageUrl = imageUrl,
-                    SceneryId = scenery.Id
-                };
-
-                db.Images.Add(image);
-                await db.SaveChangesAsync();
-
-
-            }
-
 
 
             return RedirectToAction("Index", new { id = id });

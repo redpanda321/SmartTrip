@@ -6,11 +6,10 @@ namespace SmartTrip.Models
     {
         public int Id { get; set; }
         public string ImageUrl { get; set; }
+       //many to one
 
-        public int SceneryId { get; set; }
         public virtual Scenery Scenery { get; set; }
-
-        public int HotelId { get; set; }
+        
         public virtual Hotel Hotel {get;set;}
     }
 }
