@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Country", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken();
     
@@ -14,7 +14,19 @@
         @Html.EditorFor(x => x.Country.CountryName)
     </div>
 
-    
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Country.ImageUrl)
+        @Html.EditorFor(x => x.Country.ImageUrl)
+    </div>
+
+
+    <div class="form-group">
+
+        <input type="file" name="file" id="file1" />
+    </div>
+
+
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-default" />
     </div>

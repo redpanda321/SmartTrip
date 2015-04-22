@@ -1,41 +1,58 @@
 {
-    "name": "WebApplication",
-    "private": true,
-    "dependencies": {
-        "bootstrap": "3.0.0",
-        "jquery": "1.10.2",
-        "jquery-validation": "1.11.1",
-        "jquery-validation-unobtrusive": "3.2.2",
-        "hammer.js": "2.0.4",
-        "bootstrap-touch-carousel": "0.8.0",
-        "bootstrap-datepicker": "latest"
+  "name": "WebApplication",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.0.0",
+    "jquery": "1.10.2",
+    "jquery-validation": "1.11.1",
+    "jquery-validation-unobtrusive": "3.2.2",
+    "hammer.js": "2.0.4",
+    "bootstrap-touch-carousel": "0.8.0",
+    "bootstrap-datepicker": "latest",
+    "jquery-ui": "1.11.4",
+    "jquery-mobile": "1.4.5"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "js": "dist/js/*.*",
+      "css": "dist/css/*.*",
+      "fonts": "dist/fonts/*.*"
     },
-    "exportsOverride": {
-        "bootstrap": {
-            "js": "dist/js/*.*",
-            "css": "dist/css/*.*",
-            "fonts": "dist/fonts/*.*"
-        },
     "bootstrap-datepicker": {
-        "js": "js/*.*",
-        "js/locales": "js/locales/*.*",
+      "js": "js/*.*",
+      "js/locales": "js/locales/*.*",
       "css": "css/*.*"
-        },
+    },
     "bootstrap-touch-carousel": {
       "js": "dist/js/*.*",
       "css": "dist/css/*.*"
-        },
-     "jquery": {
+    },
+    "jquery": {
       "": "jquery.{js,min.js,min.map}"
-        },
-        "jquery-validation": {
-            "": "jquery.validate.js"
-        },
+    },
+    "jquery-ui": {
+        "": "*.*",
+        "themes/smoothness": "themes/smoothness/*.*",
+        "themes/smoothness/images": "themes/smoothness/images/*.*",
+        "ui": "ui/*.*",
+        "ui/i18n": "ui/i18n/*.*"
+    },
+     "jquery-mobile": {
+      "js": "js/jquery.mobile.js",
+	  "css":"css/themes/default/jquery.mobile.css"
+    },
+    "jquery-validation": {
+      "": "jquery.validate.js"
+    },
     "jquery-validation-unobtrusive": {
       "": "jquery.validate.unobtrusive.{js,min.js}"
     },
     "hammer": {
       "": "hammer.{js,min.js}"
-        }
     }
+   
+  },
+  "resolutions": {
+    "jquery-ui": "1.11.4"
+  }
 }

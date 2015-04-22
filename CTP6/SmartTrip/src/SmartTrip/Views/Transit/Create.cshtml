@@ -1,4 +1,4 @@
-﻿@model SmartTrip.Models.TransitEditModel
+﻿@model SmartTrip.Models.TransitViewModel
     
 @{
     ViewBag.Title = "Create a Transit";
@@ -11,66 +11,61 @@
         @Html.AntiForgeryToken();
 
         <div class="form-group">
-            @Html.LabelFor(x => x.TransitName)
-            @Html.EditorFor(x => x.TransitName)
+            @Html.LabelFor(x => x.Transit.TransitName)
+            @Html.EditorFor(x => x.Transit.TransitName)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.TransitType)
-            @Html.EditorFor(x => x.TransitType)
+            @Html.LabelFor(x => x.Transit.TransitType)
+            @Html.DropDownListFor(x => x.Transit.TransitType,Model.TransitTypes)
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(x => x.TransitNumber)
-            @Html.EditorFor(x => x.TransitNumber)
+            @Html.LabelFor(x => x.Transit.TransitNumber)
+            @Html.EditorFor(x => x.Transit.TransitNumber)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.StartingCity)
-            @Html.EditorFor(x => x.StartingCity)
+            @Html.LabelFor(x => x.Transit.StartingCity)
+            @Html.DropDownListFor(x => x.Transit.StartingCity,Model.Cities)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.DestinationCity)
-            @Html.EditorFor(x => x.DestinationCity)
+            @Html.LabelFor(x => x.Transit.DestinationCity)
+            @Html.DropDownListFor(x => x.Transit.DestinationCity,Model.Cities)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.StartTime)
-            @Html.EditorFor(x => x.StartTime)
+            @Html.LabelFor(x => x.Transit.StartTime)
+            @Html.EditorFor(x => x.Transit.StartTime)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.EndTime)
-            @Html.EditorFor(x => x.EndTime)
+            @Html.LabelFor(x => x.Transit.EndTime)
+            @Html.EditorFor(x => x.Transit.EndTime)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Price)
-            @Html.EditorFor(x => x.Price)
+            @Html.LabelFor(x => x.Transit.Price)
+            @Html.EditorFor(x => x.Transit.Price)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Currency)
-            @Html.EditorFor(x => x.Currency)
+            @Html.LabelFor(x => x.Transit.Currency)
+            @Html.DropDownListFor(x => x.Transit.Currency,Model.Currencies)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Amount)
-            @Html.EditorFor(x => x.Amount)
+            @Html.LabelFor(x => x.Transit.Amount)
+            @Html.EditorFor(x => x.Transit.Amount)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Memo)
-            @Html.EditorFor(x => x.Memo)
+            @Html.LabelFor(x => x.Transit.Memo)
+            @Html.EditorFor(x => x.Transit.Memo)
         </div>
 
        
-        <div class="form-group">
-            @Html.LabelFor(x => x.UserName)
-            @Html.EditorFor(x => x.UserName)
-        </div>
-
-        
+         
         <input type="submit" value="submit" class="btn btn-default" />
 }

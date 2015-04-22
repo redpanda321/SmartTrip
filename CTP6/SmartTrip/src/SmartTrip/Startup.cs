@@ -46,13 +46,13 @@ namespace SmartTrip
             services.AddIdentity<ApplicationUser, IdentityRole>(Configuration)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            // Add MVC services to the services container.
-            services.AddMvc();
-
 
             //Add Session
             services.AddCachingServices();
             services.AddSessionServices();
+
+            // Add MVC services to the services container.
+            services.AddMvc();
 
             // Uncomment the following line to add Web API servcies which makes it easier to port Web API 2 controllers.
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
@@ -87,6 +87,10 @@ namespace SmartTrip
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
 
+
+            //Add Session
+            app.UseInMemorySession(configure: s => s.IdleTimeout = TimeSpan.FromMinutes(30));
+
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
             {
@@ -99,10 +103,12 @@ namespace SmartTrip
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
-            //Add Session
-            app.UseSession(o => {
-
-                o.IdleTimeout = TimeSpan.FromSeconds(6000);
+        
+            app.Run(async context =>
+            {
+                int visits = 0;
+                visits =  context.Session.GetInt("visits") ?? 0;
+                context.Session.SetInt("visits", ++visits);
             });
 
             CreateSampleData(app.ApplicationServices).Wait();

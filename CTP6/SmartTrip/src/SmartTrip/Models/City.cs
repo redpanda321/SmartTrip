@@ -15,11 +15,13 @@ namespace SmartTrip.Models
 
         public int Visited { set; get; }
 
+
+        public int Days { set; get; }
+
         //many to one
         public int CountryId { set; get; }
         public virtual Country Country { set; get; }
 
-        
         public virtual Trip Trip { set; get; }
         public virtual Schedule Schedule {set;get;}
 

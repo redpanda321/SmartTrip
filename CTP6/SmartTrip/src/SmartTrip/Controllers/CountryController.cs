@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.Hosting;
+using System.IO;
 
 namespace SmartTrip.Controllers
 {
@@ -13,10 +17,29 @@ namespace SmartTrip.Controllers
     {
         private readonly ApplicationDbContext db;
 
-        public CountryController(ApplicationDbContext context)
+        private IHostingEnvironment env;
+
+        public CountryController(ApplicationDbContext context,IHostingEnvironment hostingEnv)
         {
             db = context;
+            env = hostingEnv;
         }
+
+        public async Task<string> SaveFile(IFormFile file)
+        {
+            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            string fileName = parsedContentDisposition.FileName.Trim('"');
+
+            string filePath = Path.Combine(env.WebRoot + "\\images\\" + fileName);
+
+            await file.SaveAsAsync(filePath);
+
+            //return filePath;
+            return fileName;
+        }
+
+
 
         public IActionResult Index()
         {
@@ -32,8 +55,13 @@ namespace SmartTrip.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CountryViewModel model)
+        public async Task<IActionResult> Create(CountryViewModel model,IFormFile file)
         {
+            //IFormFile
+            var filePath = "";
+            if (file != null)
+                filePath = await SaveFile(file);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -42,7 +70,8 @@ namespace SmartTrip.Controllers
             var country = new Country
             {
                 CountryName = model.Country.CountryName,
-             
+                ImageUrl = (filePath.Length > 0) ? filePath : model.Country.ImageUrl
+
             };
 
             db.Countries.Add(country);
@@ -63,8 +92,14 @@ namespace SmartTrip.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Country model)
+        public async Task<IActionResult> Edit(int id, Country model,IFormFile file)
         {
+            //IFormFile
+            var filePath = "";
+            if (file != null)
+                filePath = await SaveFile(file);
+
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -77,7 +112,9 @@ namespace SmartTrip.Controllers
             }
 
             country.CountryName = model.CountryName;
-      
+
+            country.ImageUrl = (filePath.Length > 0) ? filePath : model.ImageUrl;
+
             // TODO Exception handling
             db.SaveChanges();
 

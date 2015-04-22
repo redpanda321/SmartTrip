@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SmartTrip</title>
 
+
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/datepicker.css" />
+ 
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/smoothness/jquery-ui.css">
+
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/hammer.js/hammer.js"></script>
+    <script src="~/lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js"></script>
+
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -43,16 +53,6 @@
             <p>&copy; @DateTime.Now.Year - SmartTrip</p>
         </footer>
     </div>
-    <script src="~/lib/jquery/jquery.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <script src="~/lib/hammer.js/hammer.js"></script>
-    <script src="~/lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js"></script>
-    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-
-    <script type="text/javascript">
-    $(function () { // will trigger when the document is ready
-       $('.datepicker').datepicker(); //Initialise any date pickers
-    });
-    </script>
+    
 </body>
 </html>

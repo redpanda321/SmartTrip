@@ -13,6 +13,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Session;
 
 using System.Globalization;
+using Microsoft.AspNet.Builder;
 
 namespace SmartTrip.Controllers
 {
@@ -22,82 +23,109 @@ namespace SmartTrip.Controllers
 
         private IHostingEnvironment env;
 
-       public void InitCity()
-        {
+        
 
-            var cities = db.Cities.AsEnumerable();
-            List<string> citiesList = new List<string>();
-            foreach (var city in cities)
-            {
-                citiesList.Add(city.CityName);
-            }
-            ViewBag.cities = new SelectList(citiesList.AsEnumerable());
-
-        }
-
-        public  void InitCategory()
-        {
-            var category = new Category();
-            ViewBag.categories = new SelectList ( category.CategoryType.AsEnumerable());
-             
-        }
-
-        public  void InitCurrency()
-        {
-          
-            List<string> currencies = new List<string>();
-            foreach (var cultureInfo in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
-            {
-                RegionInfo ri;
-
-                try {
-
-                    ri = new RegionInfo(cultureInfo.LCID);
-                }
-                catch
-                {
-
-                    ri = null;
-                }
-
-                if(ri != null)
-                currencies.Add(ri.ISOCurrencySymbol);
-            }
-            
-            ViewBag.currencies = new SelectList(currencies.AsEnumerable());    
-        }
-
-       
-        public TripController(ApplicationDbContext context,IHostingEnvironment hostingEnv )
+        public TripController( ApplicationDbContext context,IHostingEnvironment hostingEnv )
         {
             db = context;
             env = hostingEnv;
+       
         }
 
-
         public IActionResult TripStartTime()
-        {
-            
+        { 
             return View();
         }
 
         [HttpPost]
-        public ActionResult TripStartTime(TripStartTimeEditModel model, string btnPrevious, string btnNext)
+        public ActionResult TripStartTime(TripViewModel model, string btnPrevious, string btnNext)
         {
             
              if (btnNext != null)
             {
                 if (ModelState.IsValid)
                 {
-                    Context.Session.SetString("tripStartTime", model.StartTime.ToString());
-                    return View("TripCountry");
+                    
+                 Context.Session.SetString("tripStartTime", model.Trip.StartTime.Ticks.ToString());
+                   
+                 return RedirectToAction("TripCountry");
+
+
                 }
             }
             return View();
         }
 
+        public IActionResult TripCountry()
+        {
+ 
+              var tripViewModel = new TripViewModel();
+
+              tripViewModel.Trip.StartTime = new DateTime( System.Convert.ToInt64( Context.Session.GetString("tripStartTime")) ) ;
+              tripViewModel.Countries = db.Countries.ToList();
+
+             return View(tripViewModel);
+        }
+
+        
+        public IActionResult TripCity(int  id)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var tripViewModel = new TripViewModel();
+
+                tripViewModel.Cities = db.Cities.Where(c => c.CountryId == id).ToList();
+                for (int i = 0; i < tripViewModel.Cities.Count; i++)
+                {
+
+                    CheckedCity city = new CheckedCity();
+                    city.CityId = tripViewModel.Cities[i].Id;
+                    city.Checked = false;
+
+                    tripViewModel.CheckedCities.Add(city);
+                }
 
 
+
+                return View(tripViewModel);
+            }
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public  async Task<IActionResult> TripCity(TripViewModel model, string btnPrevious, string btnNext)
+        {
+
+
+            List<City> cities = new List<City>();
+
+            foreach (var m in model.CheckedCities)
+            { 
+               if(m.Checked)
+                {
+                    City city = await db.Cities.SingleOrDefaultAsync(x => x.Id == (int)m.CityId);
+                cities.Add(city);
+
+                }
+
+            }
+
+            var tripViewModel = new TripViewModel();
+            tripViewModel.Cities = cities;
+
+            return RedirectToAction("TripOrderDays",tripViewModel);
+        }
+
+
+
+        public IActionResult TripOrderDays(TripViewModel model)
+        {
+           
+            return View(model);
+        }
 
         public IActionResult Index()
         {
@@ -105,36 +133,27 @@ namespace SmartTrip.Controllers
 
             return View(trips);
         }
-   
+
         public IActionResult Create()
         {
-
-            InitCity();
-            InitCategory();
-            InitCurrency();
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TransitEditModel model)
+        public async Task<IActionResult> Create(TripViewModel model)
         {
-           
-
-            //SceneryEditModel
-   /*       if (!ModelState.IsValid)
+         
+         if (!ModelState.IsValid)
             {
                 return View(model);
             }
-  */
+  
 
             var trip = new Trip
             {
-                
-               
-                UserName = model.UserName
-
+     
             };
 
             db.Trips.Add(trip);
@@ -145,10 +164,6 @@ namespace SmartTrip.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            //ViewBag
-            InitCity();
-            InitCategory();
-            InitCurrency();
             
             //Edit
             var trip = await db.Sceneries.SingleOrDefaultAsync(x => x.Id == id);
@@ -161,27 +176,20 @@ namespace SmartTrip.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, TransitEditModel model)
+        public async Task<IActionResult> Edit(int id, TripViewModel model)
         {
 
-            
-            //SceneryEditModel
-            /*
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            */
+          
 
             var trip = await db.Trips.SingleOrDefaultAsync(x => x.Id == id);
             if (trip == null)
             {
                 return HttpNotFound();
             }
-
-            
-            trip.UserName = model.UserName;
-
 
             // TODO Exception handling
             db.SaveChanges();

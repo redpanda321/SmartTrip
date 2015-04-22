@@ -100,11 +100,11 @@ namespace SmartTrip.Controllers
             string fileName = parsedContentDisposition.FileName.Trim('"');
 
             string filePath = Path.Combine(env.WebRoot + "\\images\\" + fileName);
-
+            
             await file.SaveAsAsync(filePath);
 
-            return filePath;
-
+            //return filePath;
+            return fileName;
         }
 
 

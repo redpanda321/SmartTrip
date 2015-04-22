@@ -21,35 +21,33 @@ namespace SmartTrip.Controllers
 
         private IHostingEnvironment env;
 
-       public void InitCity()
+        public IEnumerable<SelectListItem> InitCity()
         {
 
-            var cities = db.Cities.AsEnumerable();
-            List<string> citiesList = new List<string>();
-            foreach (var city in cities)
-            {
-                citiesList.Add(city.CityName);
-            }
-            ViewBag.cities = new SelectList(citiesList.AsEnumerable());
+            return new SelectList(db.Cities.ToList(), "Id", "CityName");
 
         }
 
-        public  void InitCategory()
+
+        public IEnumerable<SelectListItem> InitTransitType()
         {
-            var category = new Category();
-            ViewBag.categories = new SelectList ( category.CategoryType.AsEnumerable());
-             
+            var category = new TransitClass();
+
+            return new SelectList(category.TransitType);
+
         }
 
-        public  void InitCurrency()
+        public IEnumerable<SelectListItem> InitCurrency()
         {
-          
+            // CurrentCulture.NumberFormat.CurrencySymbol
+
             List<string> currencies = new List<string>();
             foreach (var cultureInfo in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
             {
                 RegionInfo ri;
 
-                try {
+                try
+                {
 
                     ri = new RegionInfo(cultureInfo.LCID);
                 }
@@ -59,35 +57,14 @@ namespace SmartTrip.Controllers
                     ri = null;
                 }
 
-                if(ri != null)
-                currencies.Add(ri.ISOCurrencySymbol);
-            }
-            
-            ViewBag.currencies = new SelectList(currencies.AsEnumerable());    
-        }
-
-        public async Task<List<string>> SaveFiles(IEnumerable<IFormFile> files)
-        {
-
-            List<string> imageUrlList = new List<string>();
-
-            foreach (var file in files)
-            {
-
-                var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-
-                string fileName = parsedContentDisposition.FileName.Trim('"');
-
-                string filePath = Path.Combine(env.WebRoot + "\\images\\" + fileName);
-
-                await file.SaveAsAsync(filePath);
-
-                imageUrlList.Add(filePath);
+                if (ri != null)
+                    currencies.Add(ri.ISOCurrencySymbol);
             }
 
-            return imageUrlList;
+            return new SelectList(currencies);
         }
 
+       
         public TransitController(ApplicationDbContext context,IHostingEnvironment hostingEnv )
         {
             db = context;
@@ -104,40 +81,43 @@ namespace SmartTrip.Controllers
         public IActionResult Create()
         {
 
-            InitCity();
-            InitCategory();
-            InitCurrency();
+            var transitViewModel = new TransitViewModel();
+           transitViewModel.Cities = InitCity();
+           transitViewModel.TransitTypes = InitTransitType();
+           transitViewModel.Currencies = InitCurrency();
 
-            return View();
+            return View(transitViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TransitEditModel model)
+        public async Task<IActionResult> Create(TransitViewModel model)
         {
            
 
             //SceneryEditModel
-   /*       if (!ModelState.IsValid)
+
+            /*
+        if (!ModelState.IsValid)
             {
                 return View(model);
             }
-  */
+            */
 
             var transit = new Transit
             {
                 
-                TransitName = model.TransitName,
-                TransitType = model.TransitType,
-                TransitNumber = model.TransitNumber,
-                StartingCity = model.StartingCity,
-                DestinationCity = model.DestinationCity,
-                StartTime = model.StartTime,
-                EndTime = model.EndTime,
-                Price = model.Price,
-                Currency = model.Currency,   //
-                Amount = model.Amount,
-                Memo = model.Memo,
+                TransitName = model.Transit.TransitName,
+                TransitType = model.Transit.TransitType,
+                TransitNumber = model.Transit.TransitNumber,
+                StartingCity = model.Transit.StartingCity,
+                DestinationCity = model.Transit.DestinationCity,
+                StartTime = model.Transit.StartTime,
+                EndTime = model.Transit.EndTime,
+                Price = model.Transit.Price,
+                Currency = model.Transit.Currency,   //
+                Amount = model.Transit.Amount,
+                Memo = model.Transit.Memo,
              
 
             };
@@ -150,36 +130,39 @@ namespace SmartTrip.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            //ViewBag
-            InitCity();
-            InitCategory();
-            InitCurrency();
-            
+           
+            var transitViewModel = new TransitViewModel();
+            transitViewModel.Cities = InitCity();
+            transitViewModel.TransitTypes = InitTransitType();
+            transitViewModel.Currencies = InitCurrency();
+
+
             //Edit
-            var transit = await db.Sceneries.SingleOrDefaultAsync(x => x.Id == id);
+            var transit = await db.Transits.SingleOrDefaultAsync(x => x.Id == id);
             if (transit == null)
             {
                 return HttpNotFound();
             }
 
-            return View(transit);
+            transitViewModel.Transit = transit;
+
+            return View(transitViewModel);
         }
 
-
-       
+        
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, TransitEditModel model)
+        public async Task<IActionResult> Edit(int id, TransitViewModel model)
         {
 
             
-            //SceneryEditModel
-            /*
+           
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            */
+           
 
             var transit = await db.Transits.SingleOrDefaultAsync(x => x.Id == id);
             if (transit == null)
@@ -187,19 +170,18 @@ namespace SmartTrip.Controllers
                 return HttpNotFound();
             }
 
-            transit.TransitName = model.TransitName;
-            transit.TransitType= model.TransitType;
-            transit.TransitNumber = model.TransitNumber;
-            transit.StartingCity =  model.StartingCity;
-            transit.DestinationCity= model.DestinationCity;
-            transit.StartTime = model.StartTime;
-            transit.EndTime = model.EndTime;
-            transit.Price = model.Price;
-            transit.Currency = model.Currency;
-            transit.Amount = model.Amount;
-            transit.Memo = model.Memo;
+            transit.TransitName = model.Transit.TransitName;
+            transit.TransitType= model.Transit.TransitType;
+            transit.TransitNumber = model.Transit.TransitNumber;
+            transit.StartingCity =  model.Transit.StartingCity;
+            transit.DestinationCity= model.Transit.DestinationCity;
+            transit.StartTime = model.Transit.StartTime;
+            transit.EndTime = model.Transit.EndTime;
+            transit.Price = model.Transit.Price;
+            transit.Currency = model.Transit.Currency;
+            transit.Amount = model.Transit.Amount;
+            transit.Memo = model.Transit.Memo;
           
-
 
             // TODO Exception handling
             db.SaveChanges();

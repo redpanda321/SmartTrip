@@ -41,7 +41,10 @@ namespace SmartTrip.Controllers
             // CurrentCulture.NumberFormat.CurrencySymbol
 
             List<string> currencies = new List<string>();
+
+                 
             foreach (var cultureInfo in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
+
             {
                 RegionInfo ri;
 
@@ -78,7 +81,8 @@ namespace SmartTrip.Controllers
 
                 await file.SaveAsAsync(filePath);
 
-                imageUrlList.Add(filePath);
+                //  imageUrlList.Add(filePath);
+                imageUrlList.Add(fileName);
             }
 
             return imageUrlList;
@@ -104,7 +108,8 @@ namespace SmartTrip.Controllers
                 var image = new Image
                 {
 
-                    ImageUrl = filePath,
+                  //  ImageUrl = filePath,
+                  ImageUrl = fileName,
 
                 };
 
@@ -176,6 +181,16 @@ namespace SmartTrip.Controllers
             };
 
             db.Sceneries.Add(scenery);
+
+            if(imageList.Count() > 0)
+            {
+                foreach (var image in imageList)
+                {
+                    image.Scenery = scenery;
+                    db.Images.Add(image);
+                }
+            }
+
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
            }
@@ -240,9 +255,20 @@ namespace SmartTrip.Controllers
             scenery.Currency = model.Scenery.Currency;
             scenery.CityId = model.Scenery.CityId;
             scenery.Images = imageList;
-            
-           
+
+
             // TODO Exception handling
+            if (imageList.Count() > 0)
+            {
+                foreach (var image in imageList)
+                {
+                    image.Scenery = scenery;
+                    db.Images.Add(image);
+                }
+            }
+
+
+
             db.SaveChanges();
 
 
