@@ -93,15 +93,14 @@ namespace SmartTrip.Migrations
                 builder.Entity("SmartTrip.Models.City", b =>
                     {
                         b.Property<string>("CityName");
-                        b.Property<int?>("CountryId");
-                        b.Property<string>("CountryName");
+                        b.Property<int>("CountryId");
+                        b.Property<int>("Days");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
                         b.Property<string>("ImageUrl");
                         b.Property<int?>("ScheduleId");
                         b.Property<string>("Summary");
                         b.Property<int?>("TripId");
-                        b.Property<string>("UserName");
                         b.Property<int>("Visited");
                         b.Key("Id");
                     });
@@ -112,6 +111,7 @@ namespace SmartTrip.Migrations
                         b.Property<string>("Content");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
+                        b.Property<DateTime>("Time");
                         b.Property<string>("UserName");
                         b.Key("Id");
                     });
@@ -121,13 +121,13 @@ namespace SmartTrip.Migrations
                         b.Property<string>("CountryName");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
-                        b.Property<string>("UserName");
+                        b.Property<string>("ImageUrl");
                         b.Key("Id");
                     });
                 
                 builder.Entity("SmartTrip.Models.Hotel", b =>
                     {
-                        b.Property<int?>("CityId");
+                        b.Property<int>("CityId");
                         b.Property<string>("Currency");
                         b.Property<int>("Hot");
                         b.Property<string>("HotelAddress");
@@ -139,7 +139,6 @@ namespace SmartTrip.Migrations
                         b.Property<int>("Star");
                         b.Property<string>("Summary");
                         b.Property<string>("Traffic");
-                        b.Property<string>("UserName");
                         b.Key("Id");
                     });
                 
@@ -149,7 +148,18 @@ namespace SmartTrip.Migrations
                         b.Property<int?>("HotelId");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
+                        b.Property<DateTime>("Time");
                         b.Property<string>("UserName");
+                        b.Key("Id");
+                    });
+                
+                builder.Entity("SmartTrip.Models.Image", b =>
+                    {
+                        b.Property<int?>("HotelId");
+                        b.Property<int>("Id")
+                            .GenerateValueOnAdd();
+                        b.Property<string>("ImageUrl");
+                        b.Property<int?>("SceneryId");
                         b.Key("Id");
                     });
                 
@@ -158,15 +168,13 @@ namespace SmartTrip.Migrations
                         b.Property<string>("Content");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
-                        b.Property<string>("UserName");
                         b.Key("Id");
                     });
                 
                 builder.Entity("SmartTrip.Models.Scenery", b =>
                     {
                         b.Property<string>("Category");
-                        b.Property<int?>("CityId");
-                        b.Property<string>("CityName");
+                        b.Property<int>("CityId");
                         b.Property<string>("Currency");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
@@ -181,7 +189,6 @@ namespace SmartTrip.Migrations
                         b.Property<string>("Telephone");
                         b.Property<string>("Ticket");
                         b.Property<string>("Traffic");
-                        b.Property<string>("UserName");
                         b.Property<int>("Visited");
                         b.Property<string>("WebUrl");
                         b.Key("Id");
@@ -193,6 +200,7 @@ namespace SmartTrip.Migrations
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
                         b.Property<int?>("SceneryId");
+                        b.Property<DateTime>("Time");
                         b.Property<string>("UserName");
                         b.Key("Id");
                     });
@@ -201,9 +209,9 @@ namespace SmartTrip.Migrations
                     {
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
+                        b.Property<int?>("NoteId");
                         b.Property<string>("ScheduleName");
                         b.Property<int?>("TripId");
-                        b.Property<string>("UserName");
                         b.Key("Id");
                     });
                 
@@ -211,7 +219,7 @@ namespace SmartTrip.Migrations
                     {
                         b.Property<int>("Amount");
                         b.Property<string>("Currency");
-                        b.Property<int?>("DestinationCityId");
+                        b.Property<string>("DestinationCity");
                         b.Property<DateTime>("EndTime");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
@@ -219,21 +227,20 @@ namespace SmartTrip.Migrations
                         b.Property<decimal>("Price");
                         b.Property<int?>("ScheduleId");
                         b.Property<DateTime>("StartTime");
-                        b.Property<int?>("StartingCityId");
+                        b.Property<string>("StartingCity");
                         b.Property<string>("TransitName");
                         b.Property<string>("TransitNumber");
-                        b.Property<string>("UserName");
+                        b.Property<string>("TransitType");
                         b.Key("Id");
                     });
                 
                 builder.Entity("SmartTrip.Models.Trip", b =>
                     {
                         b.Property<int>("Days");
-                        b.Property<int?>("DestinationCountryId");
                         b.Property<int>("Id")
                             .GenerateValueOnAdd();
                         b.Property<DateTime>("StartTime");
-                        b.Property<int?>("StartingCityId");
+                        b.Property<string>("StartingCity");
                         b.Property<string>("TripName");
                         b.Property<string>("UserName");
                         b.Key("Id");
@@ -257,8 +264,8 @@ namespace SmartTrip.Migrations
                 builder.Entity("SmartTrip.Models.City", b =>
                     {
                         b.ForeignKey("SmartTrip.Models.Country", "CountryId");
-                        b.ForeignKey("SmartTrip.Models.Schedule", "ScheduleId");
                         b.ForeignKey("SmartTrip.Models.Trip", "TripId");
+                        b.ForeignKey("SmartTrip.Models.Schedule", "ScheduleId");
                     });
                 
                 builder.Entity("SmartTrip.Models.CityComment", b =>
@@ -276,9 +283,10 @@ namespace SmartTrip.Migrations
                         b.ForeignKey("SmartTrip.Models.Hotel", "HotelId");
                     });
                 
-                builder.Entity("SmartTrip.Models.Note", b =>
+                builder.Entity("SmartTrip.Models.Image", b =>
                     {
-                        b.ForeignKey("SmartTrip.Models.Schedule", "Id");
+                        b.ForeignKey("SmartTrip.Models.Scenery", "SceneryId");
+                        b.ForeignKey("SmartTrip.Models.Hotel", "HotelId");
                     });
                 
                 builder.Entity("SmartTrip.Models.Scenery", b =>
@@ -294,20 +302,14 @@ namespace SmartTrip.Migrations
                 
                 builder.Entity("SmartTrip.Models.Schedule", b =>
                     {
+                        b.ForeignKey("SmartTrip.Models.Hotel", "Id");
+                        b.ForeignKey("SmartTrip.Models.Note", "NoteId");
                         b.ForeignKey("SmartTrip.Models.Trip", "TripId");
                     });
                 
                 builder.Entity("SmartTrip.Models.Transit", b =>
                     {
-                        b.ForeignKey("SmartTrip.Models.City", "DestinationCityId");
-                        b.ForeignKey("SmartTrip.Models.City", "StartingCityId");
                         b.ForeignKey("SmartTrip.Models.Schedule", "ScheduleId");
-                    });
-                
-                builder.Entity("SmartTrip.Models.Trip", b =>
-                    {
-                        b.ForeignKey("SmartTrip.Models.City", "StartingCityId");
-                        b.ForeignKey("SmartTrip.Models.Country", "DestinationCountryId");
                     });
                 
                 return builder.Model;
