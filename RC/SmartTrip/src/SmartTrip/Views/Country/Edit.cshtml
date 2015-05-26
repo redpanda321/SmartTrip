@@ -1,0 +1,31 @@
+﻿@model SmartTrip.Models.Country
+
+@{
+    ViewBag.Title = "Edit a Country";
+}
+
+
+@using (Html.BeginForm("Edit", "Country", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken();
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.CountryName)
+        @Html.EditorFor(x => x.CountryName)
+    </div>
+
+<div class="form-group">
+    @Html.LabelFor(x => x.ImageUrl)
+    @Html.EditorFor(x => x.ImageUrl)
+</div>
+
+<div class="form-group">
+
+    <input type="file" name="file" id="file1" />
+</div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+}

@@ -1,0 +1,69 @@
+﻿@model SmartTrip.Models.TransitViewModel
+
+@{
+    ViewBag.Title = "Edit a Transit";
+}
+
+@using (Html.BeginForm("Edit","Transit",FormMethod.Post))
+{
+   @Html.AntiForgeryToken();
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Transit.TransitName)
+        @Html.EditorFor(x => x.Transit.TransitName)
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.TransitType)
+            @Html.DropDownListFor(x => x.Transit.TransitType, Model.TransitTypes)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.TransitNumber)
+            @Html.EditorFor(x => x.Transit.TransitNumber)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.StartingCity)
+            @Html.DropDownListFor(x => x.Transit.StartingCity, Model.Cities)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.DestinationCity)
+            @Html.DropDownListFor(x => x.Transit.DestinationCity, Model.Cities)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.StartTime)
+            @Html.EditorFor(x => x.Transit.StartTime)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.EndTime)
+            @Html.EditorFor(x => x.Transit.EndTime)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.Price)
+            @Html.EditorFor(x => x.Transit.Price)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.Currency)
+            @Html.DropDownListFor(x => x.Transit.Currency, Model.Currencies)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.Amount)
+            @Html.EditorFor(x => x.Transit.Amount)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Transit.Memo)
+            @Html.EditorFor(x => x.Transit.Memo)
+        </div>
+
+
+        <input type="submit" value="submit" class="btn btn-default" />
+}
+

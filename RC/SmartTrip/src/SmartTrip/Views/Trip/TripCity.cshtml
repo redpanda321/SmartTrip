@@ -1,0 +1,33 @@
+﻿@model SmartTrip.Models.TripViewModel
+    
+@{
+    ViewBag.Title = "Trip - Select Cities";
+    
+}
+   
+
+@using (Html.BeginForm("TripCity", "Trip",  FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        @Html.AntiForgeryToken();
+
+
+
+    
+    <table id="TripCity">
+
+            @for (int i=0; i< Model.Cities.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBoxFor(x =>x.CheckedCities[i].Checked,new  { id =Model.Cities[i].Id })
+                        @Html.HiddenFor(x=>x.CheckedCities[i].CityId)
+                        <img alt=@Model.Cities[i].CityName src=@Url.Content("~/images/"+Model.Cities[i].ImageUrl) width="180"/>   
+                    
+                     </td>
+                </tr> 
+            }
+
+    </table>
+
+        <input type="submit" name="btnNext" value="next" class="btn btn-default" />
+}

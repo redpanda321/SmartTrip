@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "City Index";
+}
+
+<div class="jumbotron">
+    <h1>City</h1>
+</div>
+@* Markup removed for brevity *@
+<div class="row">
+    <div class="col-md-4">
+        @if (Model.Count == 0)
+        {
+            <h4>No City Items</h4>
+        }
+        else
+        {
+            <table>
+                <tr><th>City</th><th></th></tr>
+                @foreach (var city in Model)
+                {
+                    <tr>
+                        <td>@city.CityName </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "City", new { id = city.Id }) |
+                            @Html.ActionLink("Delete", "Delete", "City", new { id = city.Id })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        <div>@Html.ActionLink("Create New City", "Create", "City") </div>
+    </div>
+
+    
+</div>

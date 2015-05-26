@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Scenery Index";
+}
+
+<div class="jumbotron">
+    <h1>Scenery</h1>
+</div>
+@* Markup removed for brevity *@
+<div class="row">
+    <div class="col-md-4">
+        @if (Model.Count == 0)
+        {
+            <h4>No Scenery Items</h4>
+        }
+        else
+        {
+            <table>
+                <tr><th>Scenery</th><th></th></tr>
+                @foreach (var scenery in Model)
+                {
+                    <tr>
+                        <td>@scenery.SceneryName </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Scenery", new { id = scenery.Id }) |
+                            @Html.ActionLink("Delete", "Delete", "Scenery", new { id = scenery.Id })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        <div>@Html.ActionLink("Create New Scenery", "Create", "Scenery") </div>
+    </div>
+
+    
+</div>
