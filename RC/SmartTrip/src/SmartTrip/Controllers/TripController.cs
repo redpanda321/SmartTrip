@@ -16,6 +16,9 @@ using Microsoft.AspNet.Mvc;
 
 using System.Globalization;
 using Microsoft.AspNet.Builder;
+using System.Text;
+using System.Runtime.Serialization.Json;
+using System.Collections;
 
 namespace SmartTrip.Controllers
 {
@@ -47,7 +50,9 @@ namespace SmartTrip.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+                
+                 
+                       
                  Context.Session.SetString("tripStartTime", model.Trip.StartTime.Ticks.ToString());
                    
                  return RedirectToAction("TripCountry");
@@ -103,33 +108,43 @@ namespace SmartTrip.Controllers
 
 
             List<City> cities = new List<City>();
-            
+
+          
             foreach (var m in model.CheckedCities)
             { 
                if(m.Checked)
                 {
-                    var city =  db.Cities.Single(x => x.Id == m.CityId);
-                cities.Add(city);
-
+                   
+                 var city = await   db.Cities.FirstOrDefaultAsync(x => x.Id == m.CityId);
+                    cities.Add(city); 
+                  
                 }
 
             }
+            
+            TempData["cities"] = cities;
 
-            var tripViewModel = new TripViewModel();
             
-            
-            
-
             return RedirectToAction("TripOrderDays");
         }
 
 
+       
+    
 
-        public IActionResult TripOrderDays(TripViewModel model)
+
+    public IActionResult TripOrderDays()
         {
-           
-            return View(model);
+            TripViewModel tripViewModel = new TripViewModel();
+
+            TempData["cities"].ToString();
+
+         tripViewModel.Cities = Newtonsoft.Json.JsonConvert.DeserializeObject<List<City>>(TempData["cities"].ToString());
+            
+
+            return View(tripViewModel);
         }
+
 
         public IActionResult Index()
         {
@@ -237,5 +252,6 @@ namespace SmartTrip.Controllers
             base.Dispose(disposing);
         }
 
+        
     }
 }

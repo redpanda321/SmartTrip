@@ -12,6 +12,7 @@ namespace SmartTrip.Models
         {
 
             Trip = new Trip();
+
             SelectedCities = new List<City>();
 
             CheckedCities = new List<CheckedCity>();
@@ -20,7 +21,6 @@ namespace SmartTrip.Models
         public Trip Trip { set; get; }
 
         public List<Country> Countries { set; get; }
-
 
         public List<City> Cities { set; get; }
 

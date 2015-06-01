@@ -20,12 +20,15 @@
       "Microsoft.AspNet.StaticFiles >= 1.0.0-beta4",
       "Microsoft.AspNet.Tooling.Razor >= 1.0.0-beta4",
       "Microsoft.AspNet.Session >= 1.0.0-beta4",
+      "Microsoft.Framework.Caching.Memory >= 1.0.0-beta4",
+      "Microsoft.Framework.Caching.Redis >= 1.0.0-beta4",
       "Microsoft.Framework.ConfigurationModel.Json >= 1.0.0-beta4",
       "Microsoft.Framework.ConfigurationModel.UserSecrets >= 1.0.0-beta4",
       "Microsoft.Framework.CodeGenerators.Mvc >= 1.0.0-beta4",
       "Microsoft.Framework.Logging >= 1.0.0-beta4",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta4",
-      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta4"
+      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta4",
+      "Newtonsoft.Json >= 7.0.1-beta3"
     ],
     "DNX,Version=v4.5.1": []
   },
@@ -2124,6 +2127,37 @@
         "lib/net45/Microsoft.Framework.Caching.Memory.xml"
       ]
     },
+    "Microsoft.Framework.Caching.Redis/1.0.0-beta4": {
+      "serviceable": true,
+      "sha": "hN+UPjXF1zi6F7pbRSP8lwe7HWiFlFVh76/lf1FGt7qAVLUFEHuIGbc0ojsRup60ZoJ9qqqVNYoP3WJFevrWTw==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "Microsoft.Framework.Caching.Distributed": "1.0.0-beta4",
+            "StackExchange.Redis": "1.0.333"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/dnx451/Microsoft.Framework.Caching.Redis.dll"
+          ],
+          "compileAssemblies": [
+            "lib/dnx451/Microsoft.Framework.Caching.Redis.dll"
+          ]
+        }
+      },
+      "files": [
+        "Microsoft.Framework.Caching.Redis.1.0.0-beta4.nupkg",
+        "Microsoft.Framework.Caching.Redis.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.Caching.Redis.nuspec",
+        "lib/dnx451/Microsoft.Framework.Caching.Redis.dll",
+        "lib/dnx451/Microsoft.Framework.Caching.Redis.xml"
+      ]
+    },
     "Microsoft.Framework.CodeGeneration/1.0.0-beta4": {
       "serviceable": true,
       "sha": "JXM3CgCqFEDbHZ8B2sA/smfgZGWTMuyYDhtd72M+pok8ytG+npjDwKceDeKHIsRPlffOUUG63YBRSocCo9QSPw==",
@@ -3195,9 +3229,9 @@
         "lib/dnxcore50/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll"
       ]
     },
-    "Newtonsoft.Json/6.0.6": {
+    "Newtonsoft.Json/7.0.1-beta3": {
       "serviceable": false,
-      "sha": "w26uZNyCG5VeoKiEOJ4+9/o8koSofLKwHl7WLreIcp0U6r57L7WiRXmjp8MTKFw6dYNZ9AE0lw69WYbIhUsU9Q==",
+      "sha": "065sWAmniKTf+Xg28xrDMwKKU7v0sryThZsB6GwVW9Jm3am0INdbGxhZxwy/0nyzKrh+MkFfS4Bq9na3xH3CkQ==",
       "frameworks": {
         "DNX,Version=v4.5.1": {
           "dependencies": {},
@@ -3211,8 +3245,8 @@
         }
       },
       "files": [
-        "Newtonsoft.Json.6.0.6.nupkg",
-        "Newtonsoft.Json.6.0.6.nupkg.sha512",
+        "Newtonsoft.Json.7.0.1-beta3.nupkg",
+        "Newtonsoft.Json.7.0.1-beta3.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -3222,12 +3256,10 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netcore45/Newtonsoft.Json.dll",
-        "lib/netcore45/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
         "tools/install.ps1"
       ]
     },
@@ -3252,6 +3284,34 @@
         "Remotion.Linq.nuspec",
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll",
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.xml"
+      ]
+    },
+    "StackExchange.Redis/1.0.333": {
+      "serviceable": false,
+      "sha": "nljDzL6LVvzpYV7YPikIl/yd3pwTExT1ghpICEf2G5SsK/OrM8IVeGcsOE6U/0X0h+a9tdMlZ1qDEmcX1P1xkw==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/StackExchange.Redis.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/StackExchange.Redis.dll"
+          ]
+        }
+      },
+      "files": [
+        "StackExchange.Redis.1.0.333.nupkg",
+        "StackExchange.Redis.1.0.333.nupkg.sha512",
+        "StackExchange.Redis.nuspec",
+        "lib/net40/StackExchange.Redis.dll",
+        "lib/net40/StackExchange.Redis.dll.config",
+        "lib/net40/StackExchange.Redis.pdb",
+        "lib/net40/StackExchange.Redis.xml",
+        "lib/net45/StackExchange.Redis.dll",
+        "lib/net45/StackExchange.Redis.pdb",
+        "lib/net45/StackExchange.Redis.xml"
       ]
     },
     "System.Collections.Immutable/1.1.33-beta": {

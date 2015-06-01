@@ -20,10 +20,12 @@ gulp.task("copy", ["clean"], function () {
     "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
     "bootstrap-touch-carousel": "bootstrap-touch-carousel/dist/**/*.{js,css}",
     "hammer.js": "hammer.js/hammer*.{js,map}",
-    "jquery": "jquery/jquery*.{js,map}",
-    "jquery-validation": "jquery-validation/jquery.validate.js",
+    "jquery": "jquery/dist/jquery*.{js,map}",
+    "jquery-validation": "jquery-validation/dist/jquery.validate.js",
     "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-    "bootstrap-material-design": "bootstrap-material-design/dist/**/*.{js,map,css,ttf,svg,woff,eot}"
+    "bootstrap-material-design": "bootstrap-material-design/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
+    "bootstrap-material-datetimepicker": "bootstrap-material-datetimepicker/**/*.{js,map,css,ttf,svg,woff,eot}",
+    "momentjs": "momentjs/*.{js,map,css,ttf,svg,woff,eot}"
   }
 
   for (var destinationDir in bower) {

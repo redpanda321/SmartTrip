@@ -77,6 +77,8 @@ namespace SmartTrip
                 options.ClientSecret = Configuration["Authentication:MicrosoftAccount:ClientSecret"];
             });
 
+            services.AddCaching();
+
             services.AddSession();
 
             // Add MVC services to the services container.
@@ -114,6 +116,11 @@ namespace SmartTrip
 
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
+
+            //Add Session
+
+            app.UseInMemorySession(configure: s => s.IdleTimeout = TimeSpan.FromMinutes(30));
+
 
             // Add authentication middleware to the request pipeline. You can configure options such as Id and Secret in the ConfigureServices method.
             // For more information see http://go.microsoft.com/fwlink/?LinkID=532715

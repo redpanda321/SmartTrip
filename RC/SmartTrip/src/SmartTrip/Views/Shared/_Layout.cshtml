@@ -12,12 +12,15 @@
             <link rel="stylesheet" href="~/lib/bootstrap-material-design/css/roboto.css" />
             <link rel="stylesheet" href="~/lib/bootstrap-material-design/css/material-fullpalette.css" />
             <link rel="stylesheet" href="~/lib/bootstrap-material-design/css/ripples.css" />
+            <link rel="stylesheet" href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datepicker.css" />
             
-            
+            <link href='http://fonts.useso.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css' />
+
+
             <link rel="stylesheet" href="~/css/site.css" />
         </environment>
         <environment names="Staging,Production">
-            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
+            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/css/bootstrap.min.css"
                   asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
                   asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
@@ -34,38 +37,13 @@
             <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.css"
                   asp-fallback-href="~/lib/bootstrap-material-design/css/ripples.css"
                   asp-fallback-test-class="ripples" asp-fallback-test-property="display" asp-fallback-test-value="none" />
-            <link rel="stylesheet" href="~/css/site.css" />
+           
+            <link rel="stylesheet" href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datepicker.css" />
+
+            <link href='http://fonts.useso.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css' />
+
+             <link rel="stylesheet" href="~/css/site.css" />
         </environment>
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">@AppSettings.Options.SiteTitle</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li><a asp-controller="Country" asp-action="Index">Country</a></li>
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2015 - @AppSettings.Options.SiteTitle</p>
-            </footer>
-        </div>
 
         <environment names="Development">
             <script src="~/lib/jquery/jquery.js"></script>
@@ -74,14 +52,19 @@
             <script src="~/lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js"></script>
             <script src="~/lib/bootstrap-material-design/js/material.js"></script>
             <script src="~/lib/bootstrap-material-design/js/ripples.js"></script>
+
+            <script src="~/lib/momentjs/moment.js"></script>
+            <script src="~/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datepicker.js"></script>
+
+
         </environment>
         <environment names="Staging,Production">
-            <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.10.2.min.js"
-                    asp-fallback-src="~/lib/jquery/jquery.min.js"
+            <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.3.min.js"
+                    asp-fallback-src="~/lib/jquery/jquery.js"
                     asp-fallback-test="window.jQuery">
             </script>
-            <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+            <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/js/bootstrap.js"
                     asp-fallback-test="window.jQuery">
             </script>
             <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
@@ -104,9 +87,60 @@
                     asp-fallback-test="window.jQuery">
             </script>
 
+            <script src="~/lib/momentjs/moment.js"></script>
+            <script src="~/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datepicker.js"></script>
+
 
         </environment>
 
+
+    </head>
+    <body>
+        <div class="navbar  navbar-material-green-900 navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">@AppSettings.Options.SiteTitle</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li><a asp-controller="Country" asp-action="Index">Country</a></li>
+                        <li><a asp-controller="City" asp-action="Index">City</a></li>
+                        <li><a asp-controller="Scenery" asp-action="Index">Scenery</a></li>
+                        <li><a asp-controller="Transit" asp-action="Index">Transit</a></li>
+                        <li><a asp-controller="Trip" asp-action="Index">Trip</a></li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2015 - @AppSettings.Options.SiteTitle</p>
+            </footer>
+        </div>
+
+       
+
         @RenderSection("scripts", required: false)
+
+
+        <script type="text/javascript">
+		$(document).ready(function()
+		{
+
+			$.material.init()
+		});
+        </script>
+
     </body>
 </html>

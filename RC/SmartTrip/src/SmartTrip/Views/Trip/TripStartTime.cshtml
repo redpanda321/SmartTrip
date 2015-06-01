@@ -4,26 +4,41 @@
     ViewBag.Title = "Trip - Select  StartTime";
     
 }
-   
-@using (Html.BeginForm("TripStartTime", "Trip",  FormMethod.Post))
-{
-        @Html.AntiForgeryToken();
-        <div class="form-group input-group-sm">
 
-            @Html.LabelFor(x => x.Trip.StartTime)
-            @Html.TextBoxFor(x => x.Trip.StartTime, new{ @id = "datepicker", @type = "date" })
+<h2> Select start date</h2>
+   
+@using (Html.BeginForm("TripStartTime", "Trip",  FormMethod.Post,new{ @class="form-horizontal"}))
+{
+
+   
+        @Html.AntiForgeryToken();
+   
+
+         <div class="form-group input-group-sm">
+
+            
+            @Html.TextBoxFor(x => x.Trip.StartTime, new{ placeholder="Start Date", @class="form-control foating-label", @id = "startDate", @type = "text" })
        </div>
-       <input type="submit" name="btnNext" value="next" class="btn btn-default" />
+
+<div class="form-group">
+
+    <input type="submit" name="btnNext" value="next" class="btn btn-material-green-900" />
+</div>
 }
 
- <script type="text/javascript">
 
-  $(function() {
 
-      $("#datepicker").datepicker("show");
-
-  });
-
+<script type="text/javascript">
+		$(document).ready(function()
+		{
+			$('#startDate').bootstrapMaterialDatePicker
+			({
+				time: false
+			});
+			
+		
+			$.material.init()
+		});
 </script>
 
 

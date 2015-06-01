@@ -4,7 +4,9 @@
   },
   "Data": {
     "DefaultConnection": {
-      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-SmartTrip-80937ccf-c52a-4de4-a7b5-aa0fd32cecb0;Trusted_Connection=True;MultipleActiveResultSets=true"
+     // "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-SmartTrip-80937ccf-c52a-4de4-a7b5-aa0fd32cecb0;Trusted_Connection=True;MultipleActiveResultSets=true"
+     "ConnectionString": "Server=.;Database=SmartTrip;Trusted_Connection=True;"
+ 
     }
   }
 }

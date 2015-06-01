@@ -1,7 +1,7 @@
 ﻿@model SmartTrip.Models.TripViewModel
     
 @{
-    ViewBag.Title = "Create a Trip";
+    ViewBag.Title = "Set Order and Days";
     
 }
    
@@ -23,7 +23,7 @@
                   @Html.TextBoxFor(m=>m.Cities[i].Days,new { @id=Model.Cities[i].Id ,@class="days" })
                    </p>
 
-                  <div class="slider-days" ></div>
+                  <div class="slider shor slider-material-blue-900" ></div>
                </li>
             
             }
@@ -34,19 +34,26 @@
 
 }
 
-   <script type="text/javascript">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script> 
+  <script type="text/javascript">
 
             $(function () {
-                $(".slider-days").slider({
-                    range: "min",
-                    value:3,
-                    min:1,
-                    max:365,
-                    slide: function (event, ui) {
-                        $(".days").val(ui.value);
+                $.material.init();
+                var slider = $(".shor");
+                var input = $(".days");
+
+                    slider.noUiSlider({
+                        start: 3,
+                        connect: "lower",
+                        range: {
+                            min: 0,
+                            max: 365
                         }
-                 });
-                $(".days").val(".slider-days").slider("value");
+                    });
+
+                    slider.Link("lower").to(input);
+
+
 
             });
 

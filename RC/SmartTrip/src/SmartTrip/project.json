@@ -23,13 +23,17 @@
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta4",
     "Microsoft.AspNet.Session":"1.0.0-beta4",
 
+    "Microsoft.Framework.Caching.Memory": "1.0.0-beta4",
+    "Microsoft.Framework.Caching.Redis": "1.0.0-beta4",
     "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-beta4",
     "Microsoft.Framework.ConfigurationModel.UserSecrets": "1.0.0-beta4",
     "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta4",
     "Microsoft.Framework.Logging": "1.0.0-beta4",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta4",
-    
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta4"
+
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta4",
+
+    "Newtonsoft.Json": "7.0.1-beta3"
   },
 
   "commands": {
