@@ -25,7 +25,9 @@ gulp.task("copy", ["clean"], function () {
     "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
     "bootstrap-material-design": "bootstrap-material-design/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
     "bootstrap-material-datetimepicker": "bootstrap-material-datetimepicker/**/*.{js,map,css,ttf,svg,woff,eot}",
-    "momentjs": "momentjs/*.{js,map,css,ttf,svg,woff,eot}"
+    "momentjs": "momentjs/*.{js,map,css,ttf,svg,woff,eot}",
+    "nouislider": "nouislider/distribute/*.{js,map,css,ttf,svg,woff,eot}",
+    "jquery-sortable": "jquery-sortable/source/**/*.{js,map,css,ttf,svg,woff,eot}"
   }
 
   for (var destinationDir in bower) {

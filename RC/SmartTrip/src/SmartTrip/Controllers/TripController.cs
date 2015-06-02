@@ -139,7 +139,7 @@ namespace SmartTrip.Controllers
 
             TempData["cities"].ToString();
 
-         tripViewModel.Cities = Newtonsoft.Json.JsonConvert.DeserializeObject<List<City>>(TempData["cities"].ToString());
+         tripViewModel.Cities =new List<City>( Newtonsoft.Json.JsonConvert.DeserializeObject<List<City>>(TempData["cities"].ToString()) );
             
 
             return View(tripViewModel);

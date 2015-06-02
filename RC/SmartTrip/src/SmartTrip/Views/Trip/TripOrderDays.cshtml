@@ -5,56 +5,70 @@
     
 }
    
-@using (Html.BeginForm("TripOrderDays","Trip",  FormMethod.Post))
+@using (Html.BeginForm("TripOrderDays","Trip",  FormMethod.Post,new {@class="form-horizontal"}))
 {
         @Html.AntiForgeryToken();
 
     
-        <ul >
+        <ol  class="sortable-ol" >
 
             @for (int i=0; i <  Model.Cities.Count; i++)
             {
               <li >
-                  @Html.LabelFor(m => m.Cities[i].CityName)
 
-                  <p>
-                  @Html.LabelFor(m=>m.Cities[i].Days,new { @for=Model.Cities[i].Id })
+                 
+                  @Html.DisplayFor(m => m.Cities[i].CityName)
+                 
+           
+                 
 
-                  @Html.TextBoxFor(m=>m.Cities[i].Days,new { @id=Model.Cities[i].Id ,@class="days" })
-                   </p>
+                      @Html.LabelFor(m => m.Cities[i].Days, new { @for = Model.Cities[i].Id })
+                 
 
-                  <div class="slider shor slider-material-blue-900" ></div>
-               </li>
+          
+
+                      @Html.TextBoxFor(m => m.Cities[i].Days, new { @id = Model.Cities[i].Id  })
+
+                 
+
+                      <div  class="slider shor@(Model.Cities[i].Id)  slider-material-green-900"></div>
+                 
+
+</li>
             
             }
 
-        </ul>
+        </ol>
 
-        <input type="submit" value="submit" class="btn btn-default" />
+        <input type="submit" value="submit" class="btn btn-material-green-900" />
 
 }
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script> 
+  
   <script type="text/javascript">
 
-            $(function () {
-                $.material.init();
-                var slider = $(".shor");
-                var input = $(".days");
+      $(function () {
+          $.material.init();
 
-                    slider.noUiSlider({
+          @for (int i = 0; i < Model.Cities.Count; i++)
+         {
+
+         <text>
+               
+
+          $(".shor@(Model.Cities[i].Id)").noUiSlider({
                         start: 3,
-                        connect: "lower",
                         range: {
                             min: 0,
+                            step:1,
                             max: 365
                         }
                     });
 
-                    slider.Link("lower").to(input);
+          $(".shor@(Model.Cities[i].Id)").Link("lower").to($("#@(Model.Cities[i].Id)"));
+         </text>
+          }
 
-
-
+          
             });
 
   </script>

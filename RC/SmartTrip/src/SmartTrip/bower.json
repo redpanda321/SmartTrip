@@ -11,7 +11,8 @@
     "bootstrap-material-design": "*",
     "bootstrap-material-datetimepicker": "*",
     "momentjs": "*",
-    "nouislider": "*"
+    "nouislider": "*",
+    "jquery-sortable": "*"
   },
   "resolutions": {
     "jquery": ">=2.1.3"

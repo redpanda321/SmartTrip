@@ -14,7 +14,7 @@
             <link rel="stylesheet" href="~/lib/bootstrap-material-design/css/ripples.css" />
             <link rel="stylesheet" href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datepicker.css" />
             
-            <link href='http://fonts.useso.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css' />
+            <link rel='stylesheet' href='http://fonts.useso.com/css?family=Roboto:400,500'  type='text/css' />
 
 
             <link rel="stylesheet" href="~/css/site.css" />
@@ -56,6 +56,10 @@
             <script src="~/lib/momentjs/moment.js"></script>
             <script src="~/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datepicker.js"></script>
 
+            <script src="~/lib/nouislider/jquery.nouislider.all.js"></script>
+
+            <script src="~/lib/jquery-sortable/js/jquery-sortable.js"></script> 
+
 
         </environment>
         <environment names="Staging,Production">
@@ -90,6 +94,13 @@
             <script src="~/lib/momentjs/moment.js"></script>
             <script src="~/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datepicker.js"></script>
 
+            <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.js"
+                    asp-fallback-src="~/lib/nouislider/jquery.nouislider.all.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+
+
+            <script src="~/lib/jquery-sortable/js/jquery-sortable.js"></script>
 
         </environment>
 
