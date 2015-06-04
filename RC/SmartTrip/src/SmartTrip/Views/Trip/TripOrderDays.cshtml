@@ -10,11 +10,11 @@
         @Html.AntiForgeryToken();
 
     
-        <ol  class="sortable-ol" >
+        <ol id="TripList" class="list-group" >
 
             @for (int i=0; i <  Model.Cities.Count; i++)
             {
-              <li >
+              <li  class="list-group-item" >
 
                  
                   @Html.DisplayFor(m => m.Cities[i].CityName)
@@ -34,7 +34,7 @@
                       <div  class="slider shor@(Model.Cities[i].Id)  slider-material-green-900"></div>
                  
 
-</li>
+               </li>
             
             }
 
@@ -57,9 +57,10 @@
 
           $(".shor@(Model.Cities[i].Id)").noUiSlider({
                         start: 3,
+                        step:1,
                         range: {
                             min: 0,
-                            step:1,
+                           
                             max: 365
                         }
                     });
@@ -68,6 +69,8 @@
          </text>
           }
 
+
+          Sortable.create(TripList, {});
           
             });
 

@@ -27,7 +27,7 @@ gulp.task("copy", ["clean"], function () {
     "bootstrap-material-datetimepicker": "bootstrap-material-datetimepicker/**/*.{js,map,css,ttf,svg,woff,eot}",
     "momentjs": "momentjs/*.{js,map,css,ttf,svg,woff,eot}",
     "nouislider": "nouislider/distribute/*.{js,map,css,ttf,svg,woff,eot}",
-    "jquery-sortable": "jquery-sortable/source/**/*.{js,map,css,ttf,svg,woff,eot}"
+    "Sortable": "Sortable/*.{js,map,css,ttf,svg,woff,eot}"
   }
 
   for (var destinationDir in bower) {

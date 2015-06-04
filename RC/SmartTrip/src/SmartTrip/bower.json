@@ -12,7 +12,7 @@
     "bootstrap-material-datetimepicker": "*",
     "momentjs": "*",
     "nouislider": "*",
-    "jquery-sortable": "*"
+    "Sortable": "*"
   },
   "resolutions": {
     "jquery": ">=2.1.3"

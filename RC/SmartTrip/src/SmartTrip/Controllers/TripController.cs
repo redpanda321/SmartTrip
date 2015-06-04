@@ -51,7 +51,6 @@ namespace SmartTrip.Controllers
                 if (ModelState.IsValid)
                 {
                 
-                 
                        
                  Context.Session.SetString("tripStartTime", model.Trip.StartTime.Ticks.ToString());
                    
@@ -107,42 +106,62 @@ namespace SmartTrip.Controllers
         {
 
 
-            List<City> cities = new List<City>();
+            //List<City> cities = new List<City>();
 
-          
+
+            List<byte> arr = new List<byte>();
+
             foreach (var m in model.CheckedCities)
             { 
                if(m.Checked)
                 {
-                   
-                 var city = await   db.Cities.FirstOrDefaultAsync(x => x.Id == m.CityId);
-                    cities.Add(city); 
+
+                   arr.Add((byte)m.CityId);     
+                // var city = await   db.Cities.FirstOrDefaultAsync(x => x.Id == m.CityId);
+                //    cities.Add(city); 
                   
                 }
 
             }
-            
-            TempData["cities"] = cities;
+
+            Context.Session.Set("cities", arr.ToArray());
+
+           // TempData["cities"] = cities;
 
             
             return RedirectToAction("TripOrderDays");
         }
 
 
-       
-    
-
 
     public IActionResult TripOrderDays()
         {
             TripViewModel tripViewModel = new TripViewModel();
 
-            TempData["cities"].ToString();
+            // suck with TempData
+            // TempData["cities"].ToString();
 
-         tripViewModel.Cities =new List<City>( Newtonsoft.Json.JsonConvert.DeserializeObject<List<City>>(TempData["cities"].ToString()) );
-            
+            // tripViewModel.Cities =new List<City>( Newtonsoft.Json.JsonConvert.DeserializeObject<List<City>>(TempData["cities"].ToString()) );
+
+            List<byte> list =   Context.Session.Get("cities").ToList();
+
+            for (int i = 0; i < list.Count; i++) {
+
+                City city =  db.Cities.FirstOrDefault(x => x.Id == (int)list[i]);
+
+                tripViewModel.Cities.Add(city);
+
+            }
+              
 
             return View(tripViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult TripOrderDays(TripViewModel model, string btnPrevious, string btnNext)
+        {
+
+            return View();
         }
 
 

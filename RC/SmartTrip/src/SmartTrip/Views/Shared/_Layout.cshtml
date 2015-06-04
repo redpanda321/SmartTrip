@@ -58,7 +58,7 @@
 
             <script src="~/lib/nouislider/jquery.nouislider.all.js"></script>
 
-            <script src="~/lib/jquery-sortable/js/jquery-sortable.js"></script> 
+            <script src="~/lib/Sortable/Sortable.js"></script> 
 
 
         </environment>
@@ -100,7 +100,10 @@
             </script>
 
 
-            <script src="~/lib/jquery-sortable/js/jquery-sortable.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.2.0/Sortable.min.js"
+                    asp-fallback-src="~/lib/Sortable/Sortable.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
 
         </environment>
 
