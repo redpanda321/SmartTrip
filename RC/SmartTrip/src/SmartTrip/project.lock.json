@@ -28,7 +28,8 @@
       "Microsoft.Framework.Logging >= 1.0.0-beta4",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta4",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta4",
-      "Newtonsoft.Json >= 7.0.1-beta3"
+      "Newtonsoft.Json >= 7.0.1-beta3",
+      "MaxMind.GeoIP2 >= 2.2.0"
     ],
     "DNX,Version=v4.5.1": []
   },
@@ -328,6 +329,57 @@
         "lib/net45/System.Interactive.Async.XML",
         "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/System.Interactive.Async.dll",
         "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/System.Interactive.Async.XML"
+      ]
+    },
+    "MaxMind.Db/1.0.1.0": {
+      "serviceable": false,
+      "sha": "P+HaPDF+rIlbpJB14++11UpYcgFzPyWlIka55mtMmkgb06nRRBLTk4UsPLMi/orztX/cJHVdcfFJ8/69e33ZvA==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "Newtonsoft.Json": "6.0.8"
+          },
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net40/MaxMind.Db.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net40/MaxMind.Db.dll"
+          ]
+        }
+      },
+      "files": [
+        "MaxMind.Db.1.0.1.0.nupkg",
+        "MaxMind.Db.1.0.1.0.nupkg.sha512",
+        "MaxMind.Db.nuspec",
+        "lib/net40/MaxMind.Db.dll",
+        "lib/net40/MaxMind.Db.xml"
+      ]
+    },
+    "MaxMind.GeoIP2/2.2.0.0": {
+      "serviceable": false,
+      "sha": "5GDA8EJTuZpwIm+Pgn5poFJ0HE4XK+rvGtBemzmL2+PdeNW5cP+yd0Oh5qjWUxFdNakw+uuIoO+tLC1rXZN8gA==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "MaxMind.Db": "1.0.1.0",
+            "RestSharp": "105.1.0"
+          },
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net40/MaxMind.GeoIP2.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net40/MaxMind.GeoIP2.dll"
+          ]
+        }
+      },
+      "files": [
+        "MaxMind.GeoIP2.2.2.0.0.nupkg",
+        "MaxMind.GeoIP2.2.2.0.0.nupkg.sha512",
+        "MaxMind.GeoIP2.nuspec",
+        "lib/net40/MaxMind.GeoIP2.dll",
+        "lib/net40/MaxMind.GeoIP2.XML"
       ]
     },
     "Microsoft.AspNet.Authentication/1.0.0-beta4": {
@@ -3284,6 +3336,52 @@
         "Remotion.Linq.nuspec",
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll",
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.xml"
+      ]
+    },
+    "RestSharp/105.1.0": {
+      "serviceable": false,
+      "sha": "2DRH1cpTOJwesBOwQ0cIhVHUmupbRKt+tdSatfdvndvsawsGMIEgrbq8yv6g3GM1MRVcb37bT8LACVFsqITDmg==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net452/RestSharp.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net452/RestSharp.dll"
+          ]
+        }
+      },
+      "files": [
+        "readme.txt",
+        "RestSharp.105.1.0.nupkg",
+        "RestSharp.105.1.0.nupkg.sha512",
+        "RestSharp.nuspec",
+        "lib/net35/RestSharp.dll",
+        "lib/net35/RestSharp.xml",
+        "lib/net35-client/RestSharp.dll",
+        "lib/net35-client/RestSharp.xml",
+        "lib/net4/RestSharp.dll",
+        "lib/net4/RestSharp.xml",
+        "lib/net4-client/RestSharp.dll",
+        "lib/net4-client/RestSharp.xml",
+        "lib/net45/RestSharp.dll",
+        "lib/net45/RestSharp.xml",
+        "lib/net45-client/RestSharp.dll",
+        "lib/net45-client/RestSharp.xml",
+        "lib/net451/RestSharp.dll",
+        "lib/net451/RestSharp.xml",
+        "lib/net451-client/RestSharp.dll",
+        "lib/net451-client/RestSharp.xml",
+        "lib/net452/RestSharp.dll",
+        "lib/net452/RestSharp.xml",
+        "lib/net452-client/RestSharp.dll",
+        "lib/net452-client/RestSharp.xml",
+        "lib/sl4/RestSharp.Silverlight.dll",
+        "lib/sl4/RestSharp.Silverlight.xml",
+        "lib/windowsphone8/RestSharp.WindowsPhone.dll",
+        "lib/windowsphone8/RestSharp.WindowsPhone.xml"
       ]
     },
     "StackExchange.Redis/1.0.333": {

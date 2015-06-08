@@ -23,7 +23,7 @@ namespace SmartTrip.Models
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
 
-		public int Days { get; set; } //mean schedule amount
+		public int Days { get; set; } //schedule amount
        
 		public string StartingCity { get; set; }
 

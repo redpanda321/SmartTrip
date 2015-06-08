@@ -67,7 +67,7 @@ namespace SmartTrip.Controllers
  
               var tripViewModel = new TripViewModel();
 
-              tripViewModel.Trip.StartTime = new DateTime( System.Convert.ToInt64( Context.Session.GetString("tripStartTime")) ) ;
+             // tripViewModel.Trip.StartTime = new DateTime( System.Convert.ToInt64( Context.Session.GetString("tripStartTime")) ) ;
               tripViewModel.Countries = db.Countries.ToList();
 
              return View(tripViewModel);
@@ -161,7 +161,9 @@ namespace SmartTrip.Controllers
         public IActionResult TripOrderDays(TripViewModel model, string btnPrevious, string btnNext)
         {
 
-            return View();
+
+
+            return RedirectToAction("Index");
         }
 
 
