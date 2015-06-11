@@ -19,6 +19,8 @@ using Microsoft.AspNet.Builder;
 using System.Text;
 using System.Runtime.Serialization.Json;
 using System.Collections;
+using MaxMind.GeoIP2;
+using System.Security.Claims;
 
 namespace SmartTrip.Controllers
 {
@@ -102,7 +104,7 @@ namespace SmartTrip.Controllers
 
 
         [HttpPost]
-        public  async Task<IActionResult> TripCity(TripViewModel model, string btnPrevious, string btnNext)
+        public  IActionResult TripCity(TripViewModel model, string btnPrevious, string btnNext)
         {
 
 
@@ -145,6 +147,8 @@ namespace SmartTrip.Controllers
 
             List<byte> list =   Context.Session.Get("cities").ToList();
 
+          
+
             for (int i = 0; i < list.Count; i++) {
 
                 City city =  db.Cities.FirstOrDefault(x => x.Id == (int)list[i]);
@@ -161,7 +165,80 @@ namespace SmartTrip.Controllers
         public IActionResult TripOrderDays(TripViewModel model, string btnPrevious, string btnNext)
         {
 
+            // Get start city
+            var reader = new DatabaseReader(env.WebRootPath + "\\GeoLite2-City.mmdb");
 
+            IHttpConnectionFeature connection = Context.GetFeature<IHttpConnectionFeature>();
+
+            string ip = connection != null ? connection.RemoteIpAddress.ToString() : null;
+
+            if (ip == "127.0.0.1")
+                ip = "128.101.101.101";
+
+            var startCity = reader.City(ip);
+
+            //Get anonymous user Id
+
+            string userId;
+            
+            if (Context.User.IsSignedIn())
+            {
+                userId = Context.User.GetUserId();
+
+
+            }
+            else { 
+
+
+                 userId = Context.Request.Cookies["identity"];
+                if (userId == null)
+                {
+                    userId = Guid.NewGuid().ToString();
+                    Context.Response.Cookies.Append("identity", userId);
+                }
+
+            }
+
+            Trip trip = new Trip();
+
+            trip.StartCity = startCity.City.Name;
+            trip.UserName = userId;
+            trip.StartTime = new DateTime(System.Convert.ToInt64(Context.Session.GetString("tripStartTime")));
+
+            int Days = 0;
+
+            for (int i = 0; i < model.Cities.Count; i++) {
+
+                trip.TripDays += model.Cities[i].Days + ">";
+                trip.TripCities += model.Cities[i].CityName + ">";
+                Days += model.Cities[i].Days;
+
+            }
+
+            trip.TripName = trip.TripCities + Days + "Day";
+
+            db.Trips.Add(trip);
+            db.SaveChanges();
+
+            Trip myTrip =  db.Trips.FirstOrDefault(x => x.TripName == trip.TripName);
+
+            for (int i = 0; i < model.Cities.Count; i++)
+            {
+                for (int j = 0; j < model.Cities[i].Days; j++) {
+
+                    Schedule schedule = new Schedule();
+                    schedule.ScheduleName = "Day" + (i+j+1);
+                    schedule.StrCities = model.Cities[i].CityName;
+                    schedule.ScheduleDate = trip.StartTime.AddDays(i+j);
+                    schedule.TripId = myTrip.Id;
+
+                    db.Schedules.Add(schedule);
+                    db.SaveChanges();
+
+                }
+            }
+
+            
 
             return RedirectToAction("Index");
         }

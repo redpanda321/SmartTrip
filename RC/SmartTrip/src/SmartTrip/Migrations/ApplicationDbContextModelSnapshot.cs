@@ -205,14 +205,17 @@ namespace SmartTrip.Migrations
                             .Annotation("SqlServer:ValueGeneration", "Default");
                         b.Property<decimal>("Price")
                             .Annotation("OriginalValueIndex", 6);
+                        b.Property<int?>("ScheduleId")
+                            .Annotation("OriginalValueIndex", 7)
+                            .Annotation("ShadowIndex", 0);
                         b.Property<int>("Score")
-                            .Annotation("OriginalValueIndex", 7);
-                        b.Property<int>("Star")
                             .Annotation("OriginalValueIndex", 8);
-                        b.Property<string>("Summary")
+                        b.Property<int>("Star")
                             .Annotation("OriginalValueIndex", 9);
-                        b.Property<string>("Traffic")
+                        b.Property<string>("Summary")
                             .Annotation("OriginalValueIndex", 10);
+                        b.Property<string>("Traffic")
+                            .Annotation("OriginalValueIndex", 11);
                         b.Key("Id");
                     });
                 
@@ -326,14 +329,23 @@ namespace SmartTrip.Migrations
                     {
                         b.Property<int>("Id")
                             .Annotation("OriginalValueIndex", 0);
-                        b.Property<int?>("NoteId")
-                            .Annotation("OriginalValueIndex", 1)
-                            .Annotation("ShadowIndex", 0);
+                        b.Property<DateTime>("ScheduleDate")
+                            .Annotation("OriginalValueIndex", 1);
                         b.Property<string>("ScheduleName")
                             .Annotation("OriginalValueIndex", 2);
+                        b.Property<string>("StrCities")
+                            .Annotation("OriginalValueIndex", 3);
+                        b.Property<string>("StrHotels")
+                            .Annotation("OriginalValueIndex", 4);
+                        b.Property<string>("StrNote")
+                            .Annotation("OriginalValueIndex", 5);
+                        b.Property<string>("StrSceneries")
+                            .Annotation("OriginalValueIndex", 6);
+                        b.Property<string>("StrTransits")
+                            .Annotation("OriginalValueIndex", 7);
                         b.Property<int?>("TripId")
-                            .Annotation("OriginalValueIndex", 3)
-                            .Annotation("ShadowIndex", 1);
+                            .Annotation("OriginalValueIndex", 8)
+                            .Annotation("ShadowIndex", 0);
                         b.Key("Id");
                     });
                 
@@ -373,20 +385,22 @@ namespace SmartTrip.Migrations
                 
                 builder.Entity("SmartTrip.Models.Trip", b =>
                     {
-                        b.Property<int>("Days")
-                            .Annotation("OriginalValueIndex", 0);
                         b.Property<int>("Id")
                             .GenerateValueOnAdd()
-                            .Annotation("OriginalValueIndex", 1)
+                            .Annotation("OriginalValueIndex", 0)
                             .Annotation("SqlServer:ValueGeneration", "Default");
+                        b.Property<string>("StartCity")
+                            .Annotation("OriginalValueIndex", 1);
                         b.Property<DateTime>("StartTime")
                             .Annotation("OriginalValueIndex", 2);
-                        b.Property<string>("StartingCity")
+                        b.Property<string>("TripCities")
                             .Annotation("OriginalValueIndex", 3);
-                        b.Property<string>("TripName")
+                        b.Property<string>("TripDays")
                             .Annotation("OriginalValueIndex", 4);
-                        b.Property<string>("UserName")
+                        b.Property<string>("TripName")
                             .Annotation("OriginalValueIndex", 5);
+                        b.Property<string>("UserName")
+                            .Annotation("OriginalValueIndex", 6);
                         b.Key("Id");
                     });
                 
@@ -426,6 +440,7 @@ namespace SmartTrip.Migrations
                 builder.Entity("SmartTrip.Models.Hotel", b =>
                     {
                         b.ForeignKey("SmartTrip.Models.City", "CityId");
+                        b.ForeignKey("SmartTrip.Models.Schedule", "ScheduleId");
                     });
                 
                 builder.Entity("SmartTrip.Models.HotelComment", b =>
@@ -452,8 +467,7 @@ namespace SmartTrip.Migrations
                 
                 builder.Entity("SmartTrip.Models.Schedule", b =>
                     {
-                        b.ForeignKey("SmartTrip.Models.Hotel", "Id");
-                        b.ForeignKey("SmartTrip.Models.Note", "NoteId");
+                        b.ForeignKey("SmartTrip.Models.Note", "Id");
                         b.ForeignKey("SmartTrip.Models.Trip", "TripId");
                     });
                 

@@ -23,16 +23,15 @@ namespace SmartTrip.Models
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
 
-		public int Days { get; set; } //schedule amount
+        public string StartCity { get; set; } //Beijing 
+
+        public string TripDays { get; set; } //i > j > k
        
-		public string StartingCity { get; set; }
+        public string TripCities { get; set; } //  Calgary > Banff
 
         //one to many
         public virtual ICollection<Schedule> Schedules { get; set; }
 
-        public virtual ICollection<City> Cities { get; set; }
-
-    
-
+       
     }
 }

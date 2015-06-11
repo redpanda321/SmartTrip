@@ -156,10 +156,10 @@ namespace SmartTrip.Controllers
 
             
             //SceneryEditModel
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+         //   if (!ModelState.IsValid)
+         //   {
+         //       return View(model);
+         //   }
 
             var scenery = new Scenery
             {
