@@ -7,11 +7,12 @@ namespace SmartTrip.Models
 {
     public class Trip
     {
+        public Trip() {
 
-        public Trip()
-        {
-            StartTime = DateTime.Now;
+            StartTime = new DateTime();
+
         }
+       
 
         public int Id { get; set; }
 
@@ -29,9 +30,7 @@ namespace SmartTrip.Models
        
         public string TripCities { get; set; } //  Calgary > Banff
 
-        //one to many
-        public virtual ICollection<Schedule> Schedules { get; set; }
-
+       
        
     }
 }

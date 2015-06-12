@@ -20,13 +20,6 @@ namespace SmartTrip.Models
 
         //many to one
         public int CountryId { set; get; }
-        public virtual Country Country { set; get; }
-
-        public virtual Trip Trip { set; get; }
-        public virtual Schedule Schedule {set;get;}
-
-        //one to many
-        public virtual ICollection<CityComment> CityComments { set; get; }
-
+       
     }
 }

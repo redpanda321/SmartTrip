@@ -10,8 +10,6 @@ namespace SmartTrip.Models
 
         public string ImageUrl { set; get; }
 
-        // one to many
-        public virtual ICollection<City> Cities { set; get; }
-
+       
     }
 }

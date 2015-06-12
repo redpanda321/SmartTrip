@@ -50,6 +50,6 @@ namespace SmartTrip.Models
         
         //many to one
 
-       public virtual Schedule Schedule { set; get; }
+       public int ScheduleId { set; get; }
     }
 }

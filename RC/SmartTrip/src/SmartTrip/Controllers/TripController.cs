@@ -12,8 +12,6 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Session;
 
-using Microsoft.AspNet.Mvc;
-
 using System.Globalization;
 using Microsoft.AspNet.Builder;
 using System.Text;
@@ -233,12 +231,13 @@ namespace SmartTrip.Controllers
                     schedule.TripId = myTrip.Id;
 
                     db.Schedules.Add(schedule);
-                    db.SaveChanges();
+                    db.SaveChangesAsync();
+
 
                 }
             }
 
-            
+
 
             return RedirectToAction("Index");
         }
@@ -251,33 +250,8 @@ namespace SmartTrip.Controllers
             return View(trips);
         }
 
-        public IActionResult Create()
-        {
+        
 
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TripViewModel model)
-        {
-         
-         if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-  
-
-            var trip = new Trip
-            {
-     
-            };
-
-            db.Trips.Add(trip);
-            await db.SaveChangesAsync();
-
-            return RedirectToAction("Index");
-           }
 
         public async Task<IActionResult> Edit(int id)
         {

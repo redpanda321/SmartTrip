@@ -17,19 +17,19 @@ namespace SmartTrip.Models
 
 	public class CityComment : Comment {
 
-       public virtual City City { set; get; }
+       public int  CityId { set; get; }
 	}
 
 	public class SceneryComment : Comment
 	{
        
-        public virtual Scenery Scenery { set; get; }
+        public int SceneryId { set; get; }
 
 	}
 
 	public class HotelComment : Comment
 	{
-        public virtual Hotel Hotel { set; get; }
+        public int HotelId { set; get; }
 
 	}
 }
