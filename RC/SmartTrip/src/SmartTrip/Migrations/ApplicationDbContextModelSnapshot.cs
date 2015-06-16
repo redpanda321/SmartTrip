@@ -316,26 +316,28 @@ namespace SmartTrip.Migrations
                 
                 builder.Entity("SmartTrip.Models.Schedule", b =>
                     {
+                        b.Property<int?>("CountryId")
+                            .Annotation("OriginalValueIndex", 0);
                         b.Property<int>("Id")
                             .GenerateValueOnAdd()
-                            .Annotation("OriginalValueIndex", 0)
+                            .Annotation("OriginalValueIndex", 1)
                             .Annotation("SqlServer:ValueGeneration", "Default");
                         b.Property<DateTime>("ScheduleDate")
-                            .Annotation("OriginalValueIndex", 1);
-                        b.Property<string>("ScheduleName")
                             .Annotation("OriginalValueIndex", 2);
-                        b.Property<string>("StrCities")
+                        b.Property<string>("ScheduleName")
                             .Annotation("OriginalValueIndex", 3);
-                        b.Property<string>("StrHotels")
+                        b.Property<string>("StrCities")
                             .Annotation("OriginalValueIndex", 4);
-                        b.Property<string>("StrNote")
+                        b.Property<string>("StrHotels")
                             .Annotation("OriginalValueIndex", 5);
-                        b.Property<string>("StrSceneries")
+                        b.Property<string>("StrNote")
                             .Annotation("OriginalValueIndex", 6);
-                        b.Property<string>("StrTransits")
+                        b.Property<string>("StrSceneries")
                             .Annotation("OriginalValueIndex", 7);
-                        b.Property<int>("TripId")
+                        b.Property<string>("StrTransits")
                             .Annotation("OriginalValueIndex", 8);
+                        b.Property<int>("TripId")
+                            .Annotation("OriginalValueIndex", 9);
                         b.Key("Id");
                     });
                 

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+
+
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Framework.OptionsModel;
 
@@ -17,7 +19,7 @@ namespace SmartTrip.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        private static bool _created;
+       // private static bool _created;
 
         public DbSet<Country> Countries { get; set; }
 
@@ -49,14 +51,16 @@ namespace SmartTrip.Models
         public ApplicationDbContext()
         {
             // Create the database and schema if it doesn't exist
-
+            /*
            
             if (!_created)
             {
                 Database.AsRelational().ApplyMigrations();
                 _created = true;
             }
-           
+            */
+         
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -67,4 +71,7 @@ namespace SmartTrip.Models
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
+
+   
+
 }

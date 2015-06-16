@@ -58,8 +58,6 @@ namespace SmartTrip.Models
         
         //many to one
         public int CityId { set; get; }
-       
-
         public int ScheduleId  { set; get; }
 
         //one to many

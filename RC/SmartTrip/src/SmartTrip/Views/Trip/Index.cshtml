@@ -21,7 +21,7 @@
                     <tr>
                         <td>@trip.TripName </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Trip", new { id = trip.Id }) |
+                            @Html.ActionLink("Schedules", "TripSchedule", "Trip", new { id = trip.Id }) |
                             @Html.ActionLink("Delete", "Delete", "Trip", new { id = trip.Id })
                         </td>
                     </tr>

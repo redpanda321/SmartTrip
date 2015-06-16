@@ -10,8 +10,8 @@ namespace SmartTrip.Models
 
         public Schedule() {
 
-
             ScheduleDate = new DateTime();
+            CountryId = 0;
         }
 
        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -31,7 +31,8 @@ namespace SmartTrip.Models
 
         public string StrNote { set; get; }
 
-
+        
+        public System.Nullable<int> CountryId { set; get; }
         //many to one
         public int TripId { set; get; }
 
