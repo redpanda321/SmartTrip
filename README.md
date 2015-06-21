@@ -3,14 +3,14 @@ Asp.net Vnext Demo (MVC6 Entity 7)
 
 How to run:
 
-1. install Visual Studio 2015 CTP6 (windows 7)
+1. install Visual Studio 2015 RC (windows 7)
 2. open CMD.exe
 3. @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/master/kvminstall.ps1'))"
-4. kvm upgrade
+4. dnx upgrade
 5. cd SmartTrip/src/SmartTrip
 6. kpm restore
-7. k ef migration add initial
-8. k ef apply
+7. dnx . ef migration add initial
+8. dnx . ef apply
 9. run !
 
 Contact me:
