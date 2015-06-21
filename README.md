@@ -5,13 +5,12 @@ How to run:
 
 1. install Visual Studio 2015 RC (windows 7)
 2. open CMD.exe
-3. @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/master/kvminstall.ps1'))"
-4. dnx upgrade
-5. cd SmartTrip/src/SmartTrip
-6. kpm restore
-7. dnx . ef migration add initial
-8. dnx . ef apply
-9. run !
+3. @powershell -NoProfile -ExecutionPolicy unrestricted -Command "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"
+4. cd SmartTrip/src/SmartTrip
+5. kpm restore
+6. dnx . ef migration add initial
+7. dnx . ef apply
+8. run !
 
 Contact me:
 
