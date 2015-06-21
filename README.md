@@ -9,7 +9,7 @@ How to run:
 4. cd SmartTrip/src/SmartTrip
 5. kpm restore
 6. dnx . ef migration add initial
-7. dnx . ef apply
+7. dnx . ef migration apply
 8. run !
 
 Contact me:
