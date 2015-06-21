@@ -60,6 +60,8 @@ namespace SmartTrip.Models
         public int CityId { set; get; }
         public int ScheduleId  { set; get; }
 
+        public virtual City City { set; get; }
+
         //one to many
         public virtual ICollection<Image> Images { set; get; }
         public virtual ICollection<SceneryComment> SceneryComments { set; get; }

@@ -18,6 +18,10 @@ namespace SmartTrip.Models
             Cities = new List<City>();
 
             CheckedCities = new List<CheckedCity>();
+
+            Sceneries = new List<Scenery>();
+
+            CheckedSceneries = new List<CheckedScenery>();
         }
 
         public Trip Trip { set; get; }
@@ -28,6 +32,10 @@ namespace SmartTrip.Models
         
         public List<CheckedCity> CheckedCities { set; get; }
 
+        public List<Scenery> Sceneries { set; get; }
+
+        public List<CheckedScenery> CheckedSceneries { set; get; }
+
 
     }
 
@@ -36,6 +44,12 @@ namespace SmartTrip.Models
     {
         public int CityId { set; get; }
 
+        public bool Checked { set; get; }
+    }
+
+    public class CheckedScenery
+    {
+        public int SceneryId { set; get; }
         public bool Checked { set; get; }
     }
     

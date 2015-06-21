@@ -276,6 +276,27 @@ namespace SmartTrip.Controllers
             return View(scheduleViewModel);
         }
 
+        public IActionResult AddScenery(int id) {
+
+            Schedule schedule = db.Schedules.FirstOrDefault(x => x.Id == id);
+            List<string> listCities = schedule.StrCities.Split('>').ToList();
+
+            List<Scenery> sceneries = new List<Scenery>();
+            for (int i = 0; i < listCities.Count; i++) {
+
+                City city = db.Cities.FirstOrDefault(x => x.CityName == listCities[i]);
+
+                sceneries.AddRange(db.Sceneries.Where(x => x.CityId == city.Id).ToList());
+
+            }
+
+            TripViewModel tripViewModel = new TripViewModel();
+            tripViewModel.Sceneries = sceneries;
+
+            return View(tripViewModel);
+        }
+
+
         public IActionResult ScheduleCity(int id)
         {
 
@@ -337,6 +358,7 @@ namespace SmartTrip.Controllers
 
             return RedirectToAction("TripScheduleInfo",new { id = scheduleId });
         }
+
 
         public async Task<IActionResult> Edit(int id)
         {

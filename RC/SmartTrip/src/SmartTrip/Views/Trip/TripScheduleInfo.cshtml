@@ -1,0 +1,40 @@
+﻿@model SmartTrip.Models.ScheduleViewModel 
+
+@{
+    ViewBag.Title = "Trip Schedule Detail";
+}
+
+<div class="jumbotron">
+    <h1>Schedule detail</h1>
+</div>
+@* Markup removed for brevity *@
+<div class="row">
+    <div class="col-md-4">
+        @if (Model.Sceneries.Count == 0)
+        {
+            <h4>No Schedule Detail</h4>
+        }
+        else
+        {
+            <table>
+                <tr><th>Schedule Sceneries</th><th></th></tr>
+                @foreach (var scenery in Model.Sceneries)
+                {
+                    <tr>
+                        <td>@scenery.SceneryName </td>
+                        <td>
+                            @Html.ActionLink("Scenery", "Index", "Scenery", new { id = scenery.Id }) 
+             
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+        <div> @Html.ActionLink("Add City","ScheduleCity","Trip",new { id = Model.Schedule.Id })</div>
+        <div> @Html.ActionLink("Add Scenery","AddScenery","Trip",new { id=Model.Schedule.Id})</div>
+        
+    </div>
+
+    
+</div>
