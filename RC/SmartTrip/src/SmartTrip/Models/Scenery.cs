@@ -55,6 +55,8 @@ namespace SmartTrip.Models
 
         public Decimal Price { set; get; }
         public string Currency { set; get; }
+
+        public string ImageUrl { set; get; }
         
         //many to one
         public int CityId { set; get; }

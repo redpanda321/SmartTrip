@@ -1,0 +1,54 @@
+﻿@model SmartTrip.Models.TripViewModel
+    
+@{
+    ViewBag.Title = "Create a Trip";
+    
+}
+   
+@using (Html.BeginForm("TripOrderDays","Trip",  FormMethod.Post))
+{
+        @Html.AntiForgeryToken();
+
+    
+        <ul >
+
+            @for (int i=0; i <  Model.Cities.Count; i++)
+            {
+              <li >
+                  @Html.LabelFor(m => m.Cities[i].CityName)
+
+                  <p>
+                  @Html.LabelFor(m=>m.Cities[i].Days,new { @for=Model.Cities[i].Id })
+
+                  @Html.TextBoxFor(m=>m.Cities[i].Days,new { @id=Model.Cities[i].Id ,@class="days" })
+                   </p>
+
+                  <div class="slider-days" ></div>
+               </li>
+            
+            }
+
+        </ul>
+
+        <input type="submit" value="submit" class="btn btn-default" />
+
+}
+
+   <script type="text/javascript">
+
+            $(function () {
+                $(".slider-days").slider({
+                    range: "min",
+                    value:3,
+                    min:1,
+                    max:365,
+                    slide: function (event, ui) {
+                        $(".days").val(ui.value);
+                        }
+                 });
+                $(".days").val(".slider-days").slider("value");
+
+            });
+
+  </script>
+

@@ -268,32 +268,34 @@ namespace SmartTrip.Migrations
                             .GenerateValueOnAdd()
                             .Annotation("OriginalValueIndex", 3)
                             .Annotation("SqlServer:ValueGeneration", "Default");
-                        b.Property<string>("OpenTime")
+                        b.Property<string>("ImageUrl")
                             .Annotation("OriginalValueIndex", 4);
-                        b.Property<decimal>("Price")
+                        b.Property<string>("OpenTime")
                             .Annotation("OriginalValueIndex", 5);
-                        b.Property<int>("Ranking")
+                        b.Property<decimal>("Price")
                             .Annotation("OriginalValueIndex", 6);
-                        b.Property<string>("SceneryName")
+                        b.Property<int>("Ranking")
                             .Annotation("OriginalValueIndex", 7);
-                        b.Property<int>("ScheduleId")
+                        b.Property<string>("SceneryName")
                             .Annotation("OriginalValueIndex", 8);
-                        b.Property<int>("Score")
+                        b.Property<int>("ScheduleId")
                             .Annotation("OriginalValueIndex", 9);
-                        b.Property<int>("Star")
+                        b.Property<int>("Score")
                             .Annotation("OriginalValueIndex", 10);
-                        b.Property<string>("Summary")
+                        b.Property<int>("Star")
                             .Annotation("OriginalValueIndex", 11);
-                        b.Property<string>("Telephone")
+                        b.Property<string>("Summary")
                             .Annotation("OriginalValueIndex", 12);
-                        b.Property<string>("Ticket")
+                        b.Property<string>("Telephone")
                             .Annotation("OriginalValueIndex", 13);
-                        b.Property<string>("Traffic")
+                        b.Property<string>("Ticket")
                             .Annotation("OriginalValueIndex", 14);
-                        b.Property<int>("Visited")
+                        b.Property<string>("Traffic")
                             .Annotation("OriginalValueIndex", 15);
-                        b.Property<string>("WebUrl")
+                        b.Property<int>("Visited")
                             .Annotation("OriginalValueIndex", 16);
+                        b.Property<string>("WebUrl")
+                            .Annotation("OriginalValueIndex", 17);
                         b.Key("Id");
                     });
                 
@@ -420,6 +422,11 @@ namespace SmartTrip.Migrations
                     {
                         b.ForeignKey("SmartTrip.Models.Hotel", "HotelId");
                         b.ForeignKey("SmartTrip.Models.Scenery", "SceneryId");
+                    });
+                
+                builder.Entity("SmartTrip.Models.Scenery", b =>
+                    {
+                        b.ForeignKey("SmartTrip.Models.City", "CityId");
                     });
                 
                 builder.Entity("SmartTrip.Models.SceneryComment", b =>

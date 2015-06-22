@@ -16,6 +16,24 @@
         }
         else
         {
+
+            <table>
+                <tr><th>Schedule Cities</th><th></th></tr>
+                @foreach (var city in Model.Cities)
+                {
+                    <tr>
+                        <td>@city.CityName </td>
+                        <td>
+                            @Html.ActionLink("City", "Index", "City", new { id = city.Id })
+
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+
+
             <table>
                 <tr><th>Schedule Sceneries</th><th></th></tr>
                 @foreach (var scenery in Model.Sceneries)
@@ -31,7 +49,7 @@
             </table>
         }
 
-        <div> @Html.ActionLink("Add City","ScheduleCity","Trip",new { id = Model.Schedule.Id })</div>
+        <div> @Html.ActionLink("Add City","AddCity","Trip",new { id = Model.Schedule.Id })</div>
         <div> @Html.ActionLink("Add Scenery","AddScenery","Trip",new { id=Model.Schedule.Id})</div>
         
     </div>

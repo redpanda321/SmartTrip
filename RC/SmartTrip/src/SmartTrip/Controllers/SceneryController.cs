@@ -154,12 +154,12 @@ namespace SmartTrip.Controllers
             if (files != null)
               imageList = await SaveFiles1(files);
 
-            
+
             //SceneryEditModel
-         //   if (!ModelState.IsValid)
-         //   {
-         //       return View(model);
-         //   }
+            //   if (!ModelState.IsValid)
+            //   {
+            //       return View(model);
+            //   }
 
             var scenery = new Scenery
             {
@@ -176,8 +176,8 @@ namespace SmartTrip.Controllers
                 Price = model.Scenery.Price,
                 Currency = model.Scenery.Currency,  //
                 CityId = model.Scenery.CityId,    //
-                Images = imageList
-              
+                Images = imageList,
+                ImageUrl = imageList[0].ImageUrl
             };
 
             db.Sceneries.Add(scenery);

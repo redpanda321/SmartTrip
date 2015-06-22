@@ -229,6 +229,8 @@ namespace SmartTrip.Controllers
                     Schedule schedule = new Schedule();
                     schedule.ScheduleName = "Day" + (i+j+1);
                     schedule.StrCities = model.Cities[i].CityName + ">";
+                    schedule.StrSceneries = ">";
+                    schedule.StrHotels = ">";
                     schedule.ScheduleDate = trip.StartTime.AddDays(i+j);
                     schedule.TripId = myTrip.Id;
                     schedule.CountryId = Context.Session.GetInt("countryId").Value;
@@ -266,9 +268,28 @@ namespace SmartTrip.Controllers
 
             ScheduleViewModel scheduleViewModel = new ScheduleViewModel();
 
-            scheduleViewModel.Schedule = db.Schedules.FirstOrDefault(x => x.Id == id);
+            Schedule  schedule = db.Schedules.FirstOrDefault(x => x.Id == id);
 
-            scheduleViewModel.Sceneries = db.Sceneries.Where(x => x.ScheduleId == id).ToList();
+            scheduleViewModel.Schedule = schedule;
+
+            List<string> listCities = schedule.StrCities.Split('>').ToList();
+            List<string> listSceneries = schedule.StrSceneries.Split('>').ToList();
+
+            for (int i = 0; i < listCities.Count; i++) {
+
+                City city = db.Cities.FirstOrDefault(x => x.CityName == listCities[i]);
+                if(city != null)
+                scheduleViewModel.Cities.Add(city);
+
+            }
+
+            for (int j = 0; j < listSceneries.Count; j++) {
+                Scenery scenery = db.Sceneries.FirstOrDefault(x => x.SceneryName == listSceneries[j]);
+                if (scenery != null)
+                    scheduleViewModel.Sceneries.Add(scenery);
+
+            }
+
 
             Context.Session.SetInt("scheduleId", id);
            
@@ -286,18 +307,68 @@ namespace SmartTrip.Controllers
 
                 City city = db.Cities.FirstOrDefault(x => x.CityName == listCities[i]);
 
+                if( city != null)
                 sceneries.AddRange(db.Sceneries.Where(x => x.CityId == city.Id).ToList());
 
             }
 
-            TripViewModel tripViewModel = new TripViewModel();
-            tripViewModel.Sceneries = sceneries;
+            List<string> listSceneries = schedule.StrSceneries.Split('>').ToList();
+            for (int j = 0; j < listSceneries.Count; j++) {
 
-            return View(tripViewModel);
+                Scenery scenery = db.Sceneries.FirstOrDefault(x => x.SceneryName == listSceneries[j]);
+                sceneries.Remove(scenery);
+            }
+
+            
+
+            ScheduleViewModel scheduleViewModel = new ScheduleViewModel();
+            scheduleViewModel.Sceneries = sceneries;
+            scheduleViewModel.Schedule = schedule;
+
+            for (int k = 0; k < sceneries.Count; k++) {
+
+                CheckedScenery checkedScenery = new CheckedScenery();
+                checkedScenery.SceneryId = sceneries[k].Id;
+                checkedScenery.Checked = false;
+                scheduleViewModel.CheckedSceneries.Add(checkedScenery); 
+
+            }
+
+
+
+
+            return View(scheduleViewModel);
         }
 
 
-        public IActionResult ScheduleCity(int id)
+        [HttpPost]
+        public IActionResult AddScenery(ScheduleViewModel model, string btnPrevious, string btnNext)
+        {
+            int scheduleId = Context.Session.GetInt("scheduleId").Value;
+
+            Schedule schedule = db.Schedules.FirstOrDefault(x => x.Id == scheduleId);
+
+            for (int i = 0; i < model.CheckedSceneries.Count; i++)
+            {
+
+                if (model.CheckedSceneries[i].Checked)
+                {
+                    Scenery scenery = db.Sceneries.FirstOrDefault(x => x.Id == model.CheckedSceneries[i].SceneryId);
+                    schedule.StrSceneries += scenery.SceneryName + ">";
+                }
+
+            }
+
+            db.SaveChanges();
+
+
+
+            return RedirectToAction("TripScheduleInfo", new { id = scheduleId });
+        }
+
+
+
+        public IActionResult AddCity(int id)
         {
 
             Schedule schedule = db.Schedules.FirstOrDefault(x => x.Id == id);
@@ -336,7 +407,7 @@ namespace SmartTrip.Controllers
         }
 
         [HttpPost]
-        public IActionResult ScheduleCity(ScheduleViewModel model, string btnPrevious,string btnNext)
+        public IActionResult AddCity(ScheduleViewModel model, string btnPrevious,string btnNext)
         {
             int scheduleId = Context.Session.GetInt("scheduleId").Value;
 
