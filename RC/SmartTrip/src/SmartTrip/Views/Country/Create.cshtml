@@ -19,18 +19,18 @@
 
     <div class="form-group">
       
-        @Html.TextBoxFor(x => x.Country.ImageUrl, new { @class = "form-control", placeholder = "Image Url" })
+        @Html.TextBoxFor(x => x.Country.ImageUrl, new { @class = "form-control  disabled", placeholder = "Image Url" })
     </div>
 
 
     <div class="form-group">
-
-        <input type="file" name="file" id="file1" class="form-control" placeholder = "Image File" />
+        <input type="text" readonly="" class="form-control floating-label" placeholder="browse..." />
+        <input type="file" name="file" id="file1" />
     </div>
 
 
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-material-blue-900" />
+        <input type="submit" value="Create" class="btn btn-material-green-900" />
     </div>
   </fieldset>
 
