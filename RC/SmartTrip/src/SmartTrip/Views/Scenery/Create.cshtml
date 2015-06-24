@@ -6,79 +6,81 @@
 }
    
 
-@using (Html.BeginForm("Create","Scenery",  FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create","Scenery",  FormMethod.Post, new { enctype = "multipart/form-data",@class="form-horizontal" }))
 {
         @Html.AntiForgeryToken();
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.SceneryName)
-            @Html.EditorFor(x => x.Scenery.SceneryName)
+           
+            @Html.TextBoxFor(x => x.Scenery.SceneryName,new{ @class="form-control" ,placeholder="Scenery Name"})
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Star)
-            @Html.EditorFor(x => x.Scenery.Star)
+           
+            @Html.TextBoxFor(x => x.Scenery.Star, new { @class = "form-control", placeholder = "Star" })
         </div>
 
         
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Summary)
-            @Html.EditorFor(x => x.Scenery.Summary)
+            
+            @Html.TextBoxFor(x => x.Scenery.Summary, new { @class = "form-control", placeholder = "Summary" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Ticket)
-            @Html.EditorFor(x => x.Scenery.Ticket)
+            
+            @Html.TextBoxFor(x => x.Scenery.Ticket, new { @class = "form-control", placeholder = "Ticket" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.OpenTime)
-            @Html.EditorFor(x => x.Scenery.OpenTime)
+            
+            @Html.TextBoxFor(x => x.Scenery.OpenTime, new { @class = "form-control", placeholder = "Open Time" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Traffic)
-            @Html.EditorFor(x => x.Scenery.Traffic)
+            
+            @Html.TextBoxFor(x => x.Scenery.Traffic, new { @class = "form-control", placeholder = "Traffic" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.WebUrl)
-            @Html.EditorFor(x => x.Scenery.WebUrl)
+            
+            @Html.TextBoxFor(x => x.Scenery.WebUrl, new { @class = "form-control", placeholder = "Website" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Category)
-            @Html.DropDownListFor(x => x.Scenery.Category,Model.Categories)
+           
+            @Html.DropDownListFor(x => x.Scenery.Category,Model.Categories, new { @class = "form-control"})
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Telephone)
-            @Html.EditorFor(x => x.Scenery.Telephone)
+            
+            @Html.TextBoxFor(x => x.Scenery.Telephone, new { @class = "form-control", placeholder = "Telephone" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Price)
-            @Html.EditorFor(x => x.Scenery.Price)
+           
+            @Html.TextBoxFor(x => x.Scenery.Price, new { @class = "form-control", placeholder = "Price" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.Currency)
-            @Html.DropDownListFor(x => x.Scenery.Currency,Model.Currencies)
+            
+            @Html.DropDownListFor(x => x.Scenery.Currency,Model.Currencies, new { @class = "form-control" })
         </div>
 
        
         <div class="form-group">
-            @Html.LabelFor(x => x.Scenery.CityId)
-            @Html.DropDownListFor(x => x.Scenery.CityId,Model.Cities)
+            
+            @Html.DropDownListFor(x => x.Scenery.CityId,Model.Cities, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
-
+            <input type="text" readonly="" class="form-control floating-label" placeholder="Browse image..." />
             <input type="file" name="files" id="file1" />
+            <input type="text" readonly="" class="form-control floating-label" placeholder="Browse image..." />
             <input type="file" name="files" id="file2" />
-            <input type="file" name="files" id="file3" />
+            <input type="text" readonly="" class="form-control floating-label" placeholder="Browse image..." />
+              <input type="file" name="files" id="file3" />
         </div>
 
         
-        <input type="submit" value="submit" class="btn btn-default" />
+        <input type="submit" value="Create" class="btn btn-flat btn-raised btn-material-green-900" />
 }

@@ -6,36 +6,31 @@
 }
    
 
-@using (Html.BeginForm("Create","City",  FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create","City",  FormMethod.Post, new { enctype = "multipart/form-data",@class="form-horizontal"}))
 {
         @Html.AntiForgeryToken();
 
         <div class="form-group">
-            @Html.LabelFor(x => x.City.CityName)
-            @Html.EditorFor(x => x.City.CityName)
+           
+            @Html.TextBoxFor(x => x.City.CityName, new { @class = "form-control", placeholder = "City Name" })
         </div>
 
        
         <div class="form-group">
-            @Html.LabelFor(x => x.City.ImageUrl)
-            @Html.EditorFor(x => x.City.ImageUrl)
+            
+            @Html.TextBoxFor(x => x.City.Summary,new { @class = "form-control", placeholder = "City Summary" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.City.Summary)
-            @Html.EditorFor(x => x.City.Summary)
+         
+            @Html.DropDownListFor(x => x.City.CountryId, Model.Countries, new { @class = "form-control", placeholder = "Select Country" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.City.CountryId)
-            @Html.DropDownListFor(x => x.City.CountryId, Model.Countries)
-        </div>
-
-        <div class="form-group">
-
+            <input type="text" readonly="" class="form-control floating-label" placeholder="Browse image..." />
             <input type="file" name="file" id="file1" />
         </div>
 
         
-        <input type="submit" value="submit" class="btn btn-default" />
+        <input type="submit" value="Create" class="btn btn-flat btn-raised btn-material-green-900" />
 }

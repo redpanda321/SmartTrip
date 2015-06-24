@@ -70,7 +70,7 @@ namespace SmartTrip.Controllers
             var country = new Country
             {
                 CountryName = model.Country.CountryName,
-                ImageUrl = (filePath.Length > 0) ? filePath : model.Country.ImageUrl
+                ImageUrl = (filePath.Length > 0) ? filePath : " "
 
             };
 

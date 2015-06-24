@@ -5,33 +5,34 @@
 }
 
 
-@using (Html.BeginForm("Create", "Country", FormMethod.Post, new { enctype = "multipart/form-data" , @class ="form-horizontal" }))
-{
-    @Html.AntiForgeryToken();
-   
 
-   <fieldset> 
+
+        @using (Html.BeginForm("Create", "Country", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken();
+
+
+            <fieldset>
+                
+    <legend></legend>
     <div class="form-group">
-        
-        @Html.TextBoxFor(x => x.Country.CountryName,new { @class="form-control", placeholder = "Country Name" })
+
+        @Html.TextBoxFor(x => x.Country.CountryName, new { @class = "form-control", placeholder = "Country Name" })
     </div>
 
 
     <div class="form-group">
-      
-        @Html.TextBoxFor(x => x.Country.ImageUrl, new { @class = "form-control  disabled", placeholder = "Image Url" })
-    </div>
-
-
-    <div class="form-group">
-        <input type="text" readonly="" class="form-control floating-label" placeholder="browse..." />
+        <input type="text" readonly="" class="form-control floating-label" placeholder="Browse image..." />
         <input type="file" name="file" id="file1" />
     </div>
 
 
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-material-green-900" />
+        <input type="submit" value="Create" class="btn  btn-flat btn-raised btn-material-green-900" />
     </div>
-  </fieldset>
 
-}
+
+
+</fieldset>
+
+        }

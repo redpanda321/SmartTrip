@@ -5,27 +5,36 @@
 }
 
 
-@using (Html.BeginForm("Edit", "Country", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div class="row">
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+
+            <img alt="@Model.CountryName" src="@Url.Content("~/images/"+Model.ImageUrl)" />
+            <div class="label label-default label-material-green-900 "> @Model.CountryName </div>
+
+        </div>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("Edit", "Country", FormMethod.Post, new {@class="form-horizotal", enctype = "multipart/form-data" }))
 
 {
     @Html.AntiForgeryToken();
 
-    <div class="form-group">
-        @Html.LabelFor(x => x.CountryName)
-        @Html.EditorFor(x => x.CountryName)
-    </div>
-
+  
 <div class="form-group">
-    @Html.LabelFor(x => x.ImageUrl)
-    @Html.EditorFor(x => x.ImageUrl)
+
+
+    @Html.TextBoxFor(x => x.CountryName, new { @class = "form-control" })
 </div>
 
 <div class="form-group">
-
+    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse image..." />
     <input type="file" name="file" id="file1" />
 </div>
 
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-default" />
+        <input type="submit" value="Save" class="btn btn-flat btn-raised btn-material-green-900" />
     </div>
 }

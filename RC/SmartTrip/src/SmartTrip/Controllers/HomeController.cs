@@ -15,14 +15,14 @@ namespace SmartTrip.Controllers
 
         public IActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your best trip planner!";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact ";
 
             return View();
         }

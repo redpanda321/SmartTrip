@@ -2,34 +2,33 @@
     ViewBag.Title = "Transit Index";
 }
 
-<div class="jumbotron">
-    <h1>Transit</h1>
-</div>
-@* Markup removed for brevity *@
-<div class="row">
-    <div class="col-md-4">
-        @if (Model.Count == 0)
-        {
-            <h4>No Transit Items</h4>
-        }
-        else
-        {
-            <table>
-                <tr><th>Transit</th><th></th></tr>
-                @foreach (var transit in Model)
-                {
-                    <tr>
-                        <td>@transit.TransitName </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Transit", new { id = transit.Id }) |
-                            @Html.ActionLink("Delete", "Delete", "Transit", new { id = transit.Id })
-                        </td>
-                    </tr>
-                }
-            </table>
-        }
-        <div>@Html.ActionLink("Create New Transit", "Create", "Transit") </div>
-    </div>
 
-    
-</div>
+@if (Model.Count == 0)
+{
+
+    <h4>No City Items</h4>
+    <a href="/Transit/Create/" class=" btn btn-xs btn-material-green-900 btn-fab btn-flat btn-raised mdi-content-add"> </a>
+
+
+}
+else
+{
+
+    <div class="row">
+        @foreach (var transit in Model)
+                {
+
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
+                   <div class="btn btn-flat btn-raised btn-material-green-900 "> @transit.TransitName</div>
+
+                    <a href="/Transit/Edit/@transit.Id" class="btn btn-xs btn-sm btn-material-green-900 btn-fab btn-flat btn-raised mdi-content-create "></a>
+                    <a href="/Transit/Delete/@transit.Id" class="btn btn-xs btn-material-green-900 btn-fab btn-flat btn-raised mdi-content-clear "></a>
+                    <a href="/Transit/Create/" class=" btn btn-xs btn-material-green-900 btn-fab btn-flat btn-raised mdi-content-add"> </a>
+
+                </div>
+            </div>
+
+        }
+    </div>
+}

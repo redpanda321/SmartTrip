@@ -4,29 +4,26 @@
     ViewBag.Title = "Delete a scenery";
 }
 
-<h2>Delete</h2>
+@using (Html.BeginForm(new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <div class="form-group">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Scenery</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SceneryName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SceneryName)
-        </dd>
-    </dl>
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+                    <img alt="@Model.SceneryName" src="@Url.Content("~/images/"+Model.ImageUrl)" />
+                    <div class="label label-default label-material-green-900 "> @Model.SceneryName </div>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                </div>
+                <input type="submit" value="Delete" class="btn btn-flat btn-raised btn-material-green-900" />
+
+            </div>
+
         </div>
-    }
-</div>
+    </fieldset>
+}
+
+

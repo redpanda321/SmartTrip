@@ -6,66 +6,66 @@
 }
    
 
-@using (Html.BeginForm("Create","Transit",  FormMethod.Post))
+@using (Html.BeginForm("Create","Transit",  FormMethod.Post ,new {@class="form-horizontal" }))
 {
         @Html.AntiForgeryToken();
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.TransitName)
-            @Html.EditorFor(x => x.Transit.TransitName)
+           
+            @Html.TextBoxFor(x => x.Transit.TransitName,new { @class="form-control",placeholder="Transit Name"})
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.TransitType)
-            @Html.DropDownListFor(x => x.Transit.TransitType,Model.TransitTypes)
+          
+            @Html.DropDownListFor(x => x.Transit.TransitType,Model.TransitTypes, new { @class = "form-control" })
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.TransitNumber)
-            @Html.EditorFor(x => x.Transit.TransitNumber)
+         
+            @Html.TextBoxFor(x => x.Transit.TransitNumber, new { @class = "form-control", placeholder = "Transit Number" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.StartingCity)
-            @Html.DropDownListFor(x => x.Transit.StartingCity,Model.Cities)
+           
+            @Html.DropDownListFor(x => x.Transit.StartingCity,Model.Cities, new { @class = "form-control"})
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.DestinationCity)
-            @Html.DropDownListFor(x => x.Transit.DestinationCity,Model.Cities)
+          
+            @Html.DropDownListFor(x => x.Transit.DestinationCity,Model.Cities, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.StartTime)
-            @Html.EditorFor(x => x.Transit.StartTime)
+           
+            @Html.TextBoxFor(x => x.Transit.StartTime, new { @class = "form-control", placeholder = "Start Time" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.EndTime)
-            @Html.EditorFor(x => x.Transit.EndTime)
+           
+            @Html.TextBoxFor(x => x.Transit.EndTime, new { @class = "form-control", placeholder = "End Time" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.Price)
-            @Html.EditorFor(x => x.Transit.Price)
+           
+            @Html.TextBoxFor(x => x.Transit.Price, new { @class = "form-control", placeholder = "Price" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.Currency)
-            @Html.DropDownListFor(x => x.Transit.Currency,Model.Currencies)
+            
+            @Html.DropDownListFor(x => x.Transit.Currency,Model.Currencies ,new { @class = "form-control" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.Amount)
-            @Html.EditorFor(x => x.Transit.Amount)
+           
+            @Html.TextBoxFor(x => x.Transit.Amount, new { @class = "form-control", placeholder = "Amount" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.Transit.Memo)
-            @Html.EditorFor(x => x.Transit.Memo)
+         
+            @Html.TextBoxFor(x => x.Transit.Memo, new { @class = "form-control", placeholder = "Memo" })
         </div>
 
        
          
-        <input type="submit" value="submit" class="btn btn-default" />
+        <input type="submit" value="Create" class="btn btn-flat btn-raised btn-material-green-900"  />
 }
