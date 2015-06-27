@@ -5,7 +5,7 @@
     
 }
    
-<h2>Select Sceneries</h2>
+
 
 
 @using (Html.BeginForm("AddScenery", "Trip",  FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -21,13 +21,13 @@
                     <td>
 
                         @Html.HiddenFor(x=>x.CheckedSceneries[i].SceneryId)
-                        <img alt=@Model.Sceneries[i].SceneryName src=@Url.Content("~/images/"+Model.Sceneries[i].ImageUrl) width="180"/>
+                        <img title=@Model.Sceneries[i].SceneryName src=@Url.Content("~/images/"+Model.Sceneries[i].ImageUrl) width="180"/>
 
                     </td>
                     
                     <td >
                         
-                        <div class="checkbox checkbox-material-green-900">
+                        <div class="checkbox checkbox-material-teal-500">
                              <label>
                         @Html.CheckBoxFor(x => x.CheckedSceneries[i].Checked, new { id = Model.Sceneries[i].Id })
                              </label>
@@ -41,7 +41,7 @@
 
     </table>
 
-        <input type="submit" name="btnNext" value="next" class="btn btn-material-green-900" />
+        <input type="submit" name="btnNext" value="next" class="btn btn-material-teal-500" />
 }
 
 

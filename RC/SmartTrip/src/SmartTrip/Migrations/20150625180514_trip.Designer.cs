@@ -8,9 +8,19 @@ using SmartTrip.Models;
 namespace SmartTrip.Migrations
 {
     [ContextType(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class trip
     {
-        public override IModel Model
+        public override string Id
+        {
+            get { return "20150625180514_trip"; }
+        }
+        
+        public override string ProductVersion
+        {
+            get { return "7.0.0-beta4-12943"; }
+        }
+        
+        public override IModel Target
         {
             get
             {

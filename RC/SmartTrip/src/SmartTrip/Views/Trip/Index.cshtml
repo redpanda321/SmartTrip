@@ -2,34 +2,36 @@
     ViewBag.Title = "Trip Index";
 }
 
-<div class="jumbotron">
-    <h1>Trip</h1>
-</div>
-@* Markup removed for brevity *@
-<div class="row">
-    <div class="col-md-4">
-        @if (Model.Count == 0)
-        {
-            <h4>No Trip Items</h4>
-        }
-        else
-        {
-            <table>
-                <tr><th>Trip</th><th></th></tr>
-                @foreach (var trip in Model)
-                {
-                    <tr>
-                        <td>@trip.TripName </td>
-                        <td>
-                            @Html.ActionLink("Schedules", "TripSchedule", "Trip", new { id = trip.Id }) |
-                            @Html.ActionLink("Delete", "Delete", "Trip", new { id = trip.Id })
-                        </td>
-                    </tr>
-                }
-            </table>
-        }
-        <div>@Html.ActionLink("Create New Trip", "TripStartTime", "Trip") </div>
-    </div>
 
-    
-</div>
+@if (Model.Count == 0)
+{
+
+    <h4>No Trip Items</h4>
+    <a href="/Trip/TripStartTime/" class=" btn btn-xs btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-add"> </a>
+
+
+}
+else
+{
+
+    <div class="row">
+        @foreach (var trip in Model)
+                {
+
+            <div class="col-sm-5 col-md-5">
+                <div class="thumbnail">
+                    
+                    <img alt="@trip.TripName" src="@Url.Content("~/images/"+trip.ImageUrl)" />
+
+                    <div class="label label-info floating-label label-material-teal-500 "> @trip.TripName</div>
+
+                    <a href="/Trip/TripSchedule/@trip.Id" class="btn btn-xs btn-sm btn-material-teal-500 btn-fab btn-flat btn-raised mdi-image-image "></a>
+                    <a href="/Trip/Delete/@trip.Id" class="btn btn-xs btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-clear "></a>
+                    <a href="/Trip/TripStartTime/" class=" btn btn-xs btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-add"> </a>
+
+                </div>
+            </div>
+
+        }
+    </div>
+}

@@ -3,33 +3,32 @@
     ViewBag.Title = "Trip Country";
 }
 
-<div class="jumbotron">
-    <h2>Select Trip Country</h2>
-</div>
-@* Markup removed for brevity *@
+
 <div class="row">
-    <div class="col-md-4">
+    
         @if (Model.Countries.Count == 0)
         {
             <h4>No Country Items</h4>
         }
         else
         {
-            <table>
-                <tr><th></th><th></th></tr>
+            
                 @foreach (var country in Model.Countries)
                 {
-                    <tr>
-                        <td>
-                            <a href='@Url.Action("TripCity","Trip",new {id = country.Id })'>
-                                <img alt= @country.CountryName  src="@Url.Content("~/images/"+country.ImageUrl)"  width="180" />
-                            </a> 
-                        </td> 
-                     </tr>
+                    <div class=" col-md-4 ">
+                        <div >
+                            <a  href='@Url.Action("TripCity","Trip",new {id = country.Id })'>
+                            
+                             <img width="260" title="@country.CountryName" src="@Url.Content("~/images/"+country.ImageUrl)">
+                            </a>
+
+                        </div>
+                    </div>
+
                 }
-            </table>
+
         }
-        
-    </div>
+
+                   
 
 </div>

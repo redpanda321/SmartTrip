@@ -5,43 +5,37 @@
     
 }
    
-<h2>Select Cities</h2>
-
 
 @using (Html.BeginForm("TripCity", "Trip",  FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
         @Html.AntiForgeryToken();
 
 
-    <table id="TripCity">
+    <div class="row" id="TripCity">
 
-            @for (int i=0; i< Model.Cities.Count; i++)
+            @for (int i = 0; i < Model.Cities.Count; i++)
             {
-                <tr>
-                    <td>
 
-                        @Html.HiddenFor(x=>x.CheckedCities[i].CityId)
-                        <img alt=@Model.Cities[i].CityName src=@Url.Content("~/images/"+Model.Cities[i].ImageUrl) width="180"/>
+                <div class="col-sm-3 col-md-3">
+                    @Html.HiddenFor(x => x.CheckedCities[i].CityId)
+                    <img title=@Model.Cities[i].CityName src=@Url.Content("~/images/"+Model.Cities[i].ImageUrl) width="260" />
 
-                    </td>
-                    
-                    <td >
-                        
-                        <div class="checkbox checkbox-material-green-900">
-                             <label>
-                        @Html.CheckBoxFor(x => x.CheckedCities[i].Checked, new { id = Model.Cities[i].Id })
-                             </label>
-                         </div>
 
-                     </td>
-                </tr>
+
+                    <div class="checkbox checkbox-material-teal-500">
+                        <label>
+                            @Html.CheckBoxFor(x => x.CheckedCities[i].Checked, new { id = Model.Cities[i].Id })
+                        </label>
+                    </div>
+                </div>
+
             }
 
 
 
-    </table>
+    </div>
 
-        <input type="submit" name="btnNext" value="next" class="btn btn-material-green-900" />
+        <input type="submit" name="btnNext" value="next" class="btn btn-material-teal-500" />
 }
 
 

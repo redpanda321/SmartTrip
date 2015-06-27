@@ -211,8 +211,11 @@ namespace SmartTrip.Controllers
                 trip.TripDays += model.Cities[i].Days + ">";
                 trip.TripCities += model.Cities[i].CityName + ">";
                 Days += model.Cities[i].Days;
+               
 
             }
+
+            trip.ImageUrl = model.Cities[0].ImageUrl;
 
             trip.TripName = trip.TripCities + Days + "Day";
 

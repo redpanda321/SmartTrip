@@ -5,7 +5,7 @@
     
 }
 
-<h2> Select start date</h2>
+
    
 @using (Html.BeginForm("TripStartTime", "Trip",  FormMethod.Post,new{ @class="form-horizontal"}))
 {
@@ -17,12 +17,12 @@
          <div class="form-group input-group-sm">
 
             
-            @Html.TextBoxFor(x => x.Trip.StartTime, new{ placeholder="Start Date", @class="form-control foating-label", @id = "startDate", @type = "text" })
+            @Html.TextBoxFor(x => x.Trip.StartTime, new{ placeholder="Select start date", @class="form-control foating-label", @id = "startDate", @type = "text" })
        </div>
 
 <div class="form-group">
 
-    <input type="submit" name="btnNext" value="next" class="btn btn-material-green-900" />
+    <input type="submit" name="btnNext" value="next" class="btn btn-material-teal-500" />
 </div>
 }
 
@@ -33,11 +33,13 @@
 		{
 			$('#startDate').bootstrapMaterialDatePicker
 			({
+			    date: "true",
+                format:"YYYY-MM-DD",
 				time: false
 			});
 			
 		
-			$.material.init()
+			
 		});
 </script>
 

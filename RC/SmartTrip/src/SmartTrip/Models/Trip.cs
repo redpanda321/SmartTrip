@@ -30,7 +30,7 @@ namespace SmartTrip.Models
        
         public string TripCities { get; set; } //  Calgary > Banff
 
-       
+        public string ImageUrl { get; set; }
        
     }
 }
