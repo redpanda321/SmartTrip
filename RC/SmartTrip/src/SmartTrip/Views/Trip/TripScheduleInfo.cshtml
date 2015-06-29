@@ -5,6 +5,18 @@
 }
 
 
+@using System.Security.Claims
+
+@{
+    var userId = User.GetUserId();
+              
+}
+
+
+
+
+
+
 @* Markup removed for brevity *@
 
     
@@ -42,8 +54,12 @@
 
             }
 
+
+
+                @if(userId == Model.Schedule.UserName)
+                { 
                     <div class="btn btn-flat btn-material-teal-400 "> @Html.ActionLink("City", "AddCity", "Trip", new { id = Model.Schedule.Id })</div>
                     <div class="btn btn-flat btn-material-teal-400 "> @Html.ActionLink("Scenery", "AddScenery", "Trip", new { id = Model.Schedule.Id })</div>
-
+                }   
 
 

@@ -36,6 +36,6 @@ namespace SmartTrip.Models
         //many to one
         public int TripId { set; get; }
 
-      
+        public string UserName { set; get; }
     }
 }

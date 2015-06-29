@@ -1,4 +1,16 @@
-﻿@inject IOptions<AppSettings> AppSettings
+﻿
+@inject IOptions<AppSettings> AppSettings
+
+@using System.Security.Claims
+
+@{
+        var user = (ClaimsIdentity)User.Identity;
+        var canEdit = user.FindFirst("CanEdit") != null ? "true" : "false";
+
+}
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -124,10 +136,14 @@
                     <ul class="nav navbar-nav">
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-controller="Trip" asp-action="Index">Trip</a></li>
+
+                        @if (canEdit =="true")
+                        { 
                         <li><a asp-controller="Country" asp-action="Index">Country</a></li>
                         <li><a asp-controller="City" asp-action="Index">City</a></li>
                         <li><a asp-controller="Scenery" asp-action="Index">Scenery</a></li>
                         <li><a asp-controller="Transit" asp-action="Index">Transit</a></li>
+                        }
                         <li><a asp-controller="Home" asp-action="About">About</a></li>
                         <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
                     </ul>

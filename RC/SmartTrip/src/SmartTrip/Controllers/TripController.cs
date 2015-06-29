@@ -176,27 +176,10 @@ namespace SmartTrip.Controllers
 
             var startCity = reader.City(ip);
 
-            //Get anonymous user Id
+            //Get  user Id
 
-            string userId;
+            string userId = Context.Session.GetString("identity");
             
-            if (Context.User.IsSignedIn())
-            {
-                userId = Context.User.GetUserId();
-
-
-            }
-            else { 
-
-
-                 userId = Context.Request.Cookies["identity"];
-                if (userId == null)
-                {
-                    userId = Guid.NewGuid().ToString();
-                    Context.Response.Cookies.Append("identity", userId);
-                }
-
-            }
 
             Trip trip = new Trip();
 
@@ -237,6 +220,7 @@ namespace SmartTrip.Controllers
                     schedule.ScheduleDate = trip.StartTime.AddDays(i+j);
                     schedule.TripId = myTrip.Id;
                     schedule.CountryId = Context.Session.GetInt("countryId").Value;
+                    schedule.UserName = userId;
 
                     db.Schedules.Add(schedule);
                     db.SaveChangesAsync();
@@ -246,14 +230,37 @@ namespace SmartTrip.Controllers
             }
 
 
-
             return RedirectToAction("Index");
         }
 
 
         public IActionResult Index()
         {
-            var trips = db.Trips.ToList();
+              
+            string userId;
+
+            if (Context.User.IsSignedIn())
+            {
+                userId = Context.User.GetUserId();
+                Context.Response.Cookies.Append("identity", userId);
+                Context.Session.SetString("identity", userId);
+            }
+            else
+            {
+
+
+                userId = Context.Request.Cookies["identity"];
+                if (userId == null)
+                {
+                    userId = Guid.NewGuid().ToString();
+                    Context.Response.Cookies.Append("identity", userId);
+                    Context.Session.SetString("identity", userId);
+                }
+
+            }
+
+
+            var trips = db.Trips.Where(x=>x.UserName == userId).ToList();
 
             return View(trips);
         }

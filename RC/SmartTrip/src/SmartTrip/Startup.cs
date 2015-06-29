@@ -21,6 +21,8 @@ using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.Runtime;
 using SmartTrip.Models;
+using Microsoft.Data.Entity.SqlServer;
+using System.Security.Claims;
 
 namespace SmartTrip
 {
@@ -140,6 +142,37 @@ namespace SmartTrip
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+
+          //  CreateSampleData(app.ApplicationServices).Wait();
+
         }
+
+
+
+        private static async Task CreateSampleData(IServiceProvider applicationServices)
+        {
+
+            var userManager = applicationServices.GetService<UserManager<ApplicationUser>>();
+
+            var tony = new ApplicationUser
+            {
+
+                UserName = "redpanda321@hotmail.com",
+                Email = "redpanda321@hotmail.com"
+            };
+            var result = await userManager.CreateAsync(tony, "12341234QQabc!@#");
+
+            if(result.Succeeded)
+            { 
+                 await userManager.AddClaimAsync(tony, new Claim("CanEdit", "true"));
+            }
+
+        }
+
+
     }
+
+
+
+
 }
