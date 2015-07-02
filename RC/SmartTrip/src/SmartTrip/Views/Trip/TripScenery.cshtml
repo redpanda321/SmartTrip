@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Trip Scenery";
+}
+
+<div id="myCarousel" class=" carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+
+        <div class="item active ">
+
+            <img src="@Url.Content("~/images/"+Model.Images[0].ImageUrl)" class="img-responsive">
+            <div class="container">
+                <div class="carousel-caption">
+                    <p>
+
+                        @Model.Scenery.SceneryName
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+        @for (int i = 1; i < Model.Images.Count; i++)
+        {
+            
+             <div class="item  ">
+        
+                <img src="@Url.Content("~/images/"+Model.Images[i].ImageUrl)" class="img-responsive">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>
+
+                                @Model.Scenery.SceneryName
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+<div class="list-group">
+
+    <div class="list-group-item">
+      <div class="row-action-primary">
+      </div>
+      <div class="row-content">
+         
+         <strong>概要:</strong> @Model.Scenery.Summary  <br/>
+         <strong>门票:</strong> @Model.Scenery.Ticket   <br/>
+         <strong>星级：</strong>@Model.Scenery.Star     <br /> 
+         <strong>评分：</strong>@Model.Scenery.Score    <br />
+         <strong>开放时间：</strong>@Model.Scenery.OpenTime <br />
+         <strong>交通：</strong>@Model.Scenery.Traffic    <br />
+         <strong>网址：</strong>@Model.Scenery.WebUrl     <br />
+         <strong>电话:</strong> @Model.Scenery.Telephone   <br />
+         
+        
+
+           
+                  
+      </div>
+
+    </div>
+    <div class="list-group-separator"></div>
+
+
+</div>

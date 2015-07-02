@@ -19,8 +19,6 @@
                  
                   @Html.DisplayFor(m => m.Cities[i].CityName)
                  
-           
-                 
 
                       @Html.LabelFor(m => m.Cities[i].Days)
 
@@ -31,6 +29,7 @@
 
                       @Html.HiddenFor(m => m.Cities[i].CountryId,Model.Cities[i].CountryId)
 
+                      @Html.HiddenFor(m => m.Cities[i].ImageUrl, Model.Cities[i].ImageUrl)
                     
                       <div  class="slider shor@(Model.Cities[i].Id)  slider-material-teal-500"></div>
                  

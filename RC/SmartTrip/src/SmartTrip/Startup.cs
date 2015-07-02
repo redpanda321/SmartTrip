@@ -143,7 +143,7 @@ namespace SmartTrip
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
-          //  CreateSampleData(app.ApplicationServices).Wait();
+            CreateSampleData(app.ApplicationServices).Wait();
 
         }
 

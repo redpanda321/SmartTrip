@@ -178,8 +178,31 @@ namespace SmartTrip.Controllers
 
             //Get  user Id
 
-            string userId = Context.Session.GetString("identity");
+            string userId ;
             
+            if (Context.User.IsSignedIn())
+            {
+                userId = Context.User.GetUserId();
+                Context.Response.Cookies.Append("identity", userId);
+                Context.Session.SetString("identity", userId);
+            }
+            else
+            {
+
+
+                //userId = Context.Request.Cookies["identity"];
+                userId = Context.Session.GetString("identity");
+                if (userId == null)
+                {
+                    userId = Guid.NewGuid().ToString();
+                    Context.Response.Cookies.Append("identity", userId);
+                    Context.Session.SetString("identity", userId);
+                }
+
+            }
+
+
+
 
             Trip trip = new Trip();
 
@@ -223,7 +246,7 @@ namespace SmartTrip.Controllers
                     schedule.UserName = userId;
 
                     db.Schedules.Add(schedule);
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
 
 
                 }
@@ -249,7 +272,8 @@ namespace SmartTrip.Controllers
             {
 
 
-                userId = Context.Request.Cookies["identity"];
+                //userId = Context.Request.Cookies["identity"];
+                userId = Context.Session.GetString("identity");
                 if (userId == null)
                 {
                     userId = Guid.NewGuid().ToString();
@@ -305,6 +329,20 @@ namespace SmartTrip.Controllers
            
 
             return View(scheduleViewModel);
+        }
+
+
+        public IActionResult TripScenery(int id) {
+
+            List<Image> listImages = db.Images.Where(x => x.SceneryId == id).ToList();
+            Scenery scenery = db.Sceneries.FirstOrDefault(x => x.Id == id);
+
+            SceneryViewModel sceneryViewModel = new SceneryViewModel();
+
+            sceneryViewModel.Images = listImages;
+            sceneryViewModel.Scenery = scenery;
+            
+            return View(sceneryViewModel);
         }
 
         public IActionResult AddScenery(int id) {

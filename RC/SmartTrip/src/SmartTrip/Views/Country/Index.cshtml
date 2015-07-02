@@ -10,11 +10,12 @@
         {
                     
             <h4>No Country Items</h4>
+            <a href="/Country/Create/" class=" btn btn-xs btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-add"> </a>
 
         }
         else
         {
-           
+
             <div class="row">
                 @foreach (var country in Model)
                 {
@@ -27,8 +28,7 @@
                     
                          <a href="/Country/Edit/@country.Id" class="btn btn-xs btn-sm btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-create "></a>
                          <a href="/Country/Delete/@country.Id" class="btn btn-xs btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-clear "></a>
-                         <a href="/Country/Create/" class=" btn btn-xs btn-material-teal-500 btn-fab btn-flat btn-raised mdi-content-add" > </a>
-
+                        
                     </div>
                </div>
                            

@@ -231,17 +231,15 @@ namespace SmartTrip.Migrations
                 builder.Entity("SmartTrip.Models.Image", b =>
                     {
                         b.Property<int?>("HotelId")
-                            .Annotation("OriginalValueIndex", 0)
-                            .Annotation("ShadowIndex", 0);
+                            .Annotation("OriginalValueIndex", 0);
                         b.Property<int>("Id")
                             .GenerateValueOnAdd()
                             .Annotation("OriginalValueIndex", 1)
                             .Annotation("SqlServer:ValueGeneration", "Default");
                         b.Property<string>("ImageUrl")
                             .Annotation("OriginalValueIndex", 2);
-                        b.Property<int?>("SceneryId")
-                            .Annotation("OriginalValueIndex", 3)
-                            .Annotation("ShadowIndex", 1);
+                        b.Property<int>("SceneryId")
+                            .Annotation("OriginalValueIndex", 3);
                         b.Key("Id");
                     });
                 
@@ -424,13 +422,7 @@ namespace SmartTrip.Migrations
                 
                 builder.Entity("SmartTrip.Models.Image", b =>
                     {
-                        b.ForeignKey("SmartTrip.Models.Hotel", "HotelId");
                         b.ForeignKey("SmartTrip.Models.Scenery", "SceneryId");
-                    });
-                
-                builder.Entity("SmartTrip.Models.Scenery", b =>
-                    {
-                        b.ForeignKey("SmartTrip.Models.City", "CityId");
                     });
                 
                 builder.Entity("SmartTrip.Models.SceneryComment", b =>

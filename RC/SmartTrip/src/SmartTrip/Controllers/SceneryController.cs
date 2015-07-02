@@ -186,7 +186,7 @@ namespace SmartTrip.Controllers
             {
                 foreach (var image in imageList)
                 {
-                    image.Scenery = scenery;
+                    image.SceneryId = scenery.Id;
                     db.Images.Add(image);
                 }
             }
@@ -262,7 +262,7 @@ namespace SmartTrip.Controllers
             {
                 foreach (var image in imageList)
                 {
-                    image.Scenery = scenery;
+                    image.SceneryId = scenery.Id;
                     db.Images.Add(image);
                 }
             }

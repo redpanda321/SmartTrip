@@ -118,6 +118,11 @@ namespace SmartTrip.Controllers
         public IActionResult LogOff()
         {
             SignInManager.SignOut();
+
+            Context.Session.Remove("identity");
+            Context.Response.Cookies.Delete("identity");
+
+
             return RedirectToAction("Index", "Home");
         }
 
