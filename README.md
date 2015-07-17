@@ -7,7 +7,7 @@ How to run:
 2. open CMD.exe
 3. @powershell -NoProfile -ExecutionPolicy unrestricted -Command "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"
 4. cd SmartTrip/src/SmartTrip
-5. kpm restore
+5. dnu restore
 6. dnx . ef migration add initial
 7. dnx . ef migration apply
 8. run !
