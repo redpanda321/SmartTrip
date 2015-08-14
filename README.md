@@ -12,7 +12,7 @@ How to run:
 5. dnu restore
 6. dnx . ef migration add initial
 7. dnx . ef migration apply
-8. run !
+8. dnx . web
 
 Contact me:
 
