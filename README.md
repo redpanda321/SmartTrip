@@ -16,9 +16,7 @@ How to run:
 
 Contact me:
 
-    msn : redpanda321@hotmail.com
-    qq : 12070132@qq.com
+    
     wechat: tony888000
-    zhihu:www.zhihu.com/people/tony-liu-777
-    linkedin:https://www.linkedin.com/pub/hua-liu/28/192/285
+    
  
