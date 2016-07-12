@@ -1,7 +1,7 @@
 # SmartTrip
 Asp.net Vnext Demo (MVC6 Entity 7)
 
-http://www.calgaryer.com/
+http://www.westghomes.com/
 
 How to run:
 
