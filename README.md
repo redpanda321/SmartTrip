@@ -1,8 +1,6 @@
 # SmartTrip
 Asp.net Vnext Demo (MVC6 Entity 7)
 
-http://www.westghomes.com/
-
 How to run:
 
 1. install Visual Studio 2015 RC (windows 7)
